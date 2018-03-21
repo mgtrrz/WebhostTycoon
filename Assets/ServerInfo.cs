@@ -31,7 +31,7 @@ public class ServerInfo : MonoBehaviour {
 		cpuUsage.text = "CPU Usage: " + server.cpuUsage.ToString("0.#\\%");
 		diskUsage.text = "Disk Usage: " + server.diskUsage.ToString("0.#\\%");
 		customers.text = "Customers: " + server.customers.Count;
-		profit.text = "Profit: $" + server.serverIncome;
+		profit.text = "Profit: $" + (server.serverIncome - server.serverCosts);
 		if ( server.acceptCustomers ) {
 			accepting.text = "Accepting: Yes";
 		} else {

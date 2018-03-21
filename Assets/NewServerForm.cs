@@ -8,7 +8,7 @@ public class NewServerForm : MonoBehaviour {
 	public InputField hostname;
 	public Dropdown serverTypeDropdown;
 	public Dropdown cpuDropdown;
-	public Dropdown softwareOption;
+	public Dropdown softwareDropdown;
 	public Dropdown hardDriveDropdown;
 	public Dropdown hardDriveCapacityDropdown;
 	public Text serverInfoDisplay;
@@ -56,8 +56,8 @@ public class NewServerForm : MonoBehaviour {
 		cpuDropdown.ClearOptions();
 		cpuDropdown.AddOptions(cpuTypes);
 
-		softwareOption.ClearOptions();
-		softwareOption.AddOptions(software);
+		softwareDropdown.ClearOptions();
+		softwareDropdown.AddOptions(software);
 
 		hardDriveDropdown.ClearOptions();
 		hardDriveDropdown.AddOptions(hardDriveTypes);
@@ -113,7 +113,7 @@ public class NewServerForm : MonoBehaviour {
 			cost += gameManager.allCpus[cpuDropdown.value].cost;
 			cost += gameManager.allServerChassis[serverTypeDropdown.value].cost;
 			cost += gameManager.allStorageDrives[hardDriveDropdown.value].cost * ( hardDriveCapacityDropdown.value + 1 );
-			cost += gameManager.allSoftware[softwareOption.value].cost;
+			cost += gameManager.allSoftware[softwareDropdown.value].cost;
 
 			return cost;
 		}
@@ -122,14 +122,14 @@ public class NewServerForm : MonoBehaviour {
 	public int MonthlyRentalCost {
 		get { 
 			int cost = 0;
-			cost += gameManager.allSoftware[softwareOption.value].cost;
+			cost += gameManager.allSoftware[softwareDropdown.value].cost;
 
 			return cost;
 		}
 	}
 
 	public void PurchaseServer() {
-		// If we can't afford this server, back out. Also maybe give a warning/error message
+		// If we can't afford this server, back out. Also give a warning/error message
 		if ( !gameManager.MakePurchase(UpfrontCost) ) {
 			return;
 		}
@@ -142,6 +142,7 @@ public class NewServerForm : MonoBehaviour {
 		serverComponent.hostname = hostname.text + "." + gameManager.domain + gameManager.companyTld;
 		serverComponent.serverChassis = gameManager.allServerChassis[serverTypeDropdown.value];
 		serverComponent.processor = gameManager.allCpus[cpuDropdown.value];
+		serverComponent.software = gameManager.allSoftware[softwareDropdown.value];
 		serverComponent.acceptCustomers = true;
 
 		for(int i = 1; i <= (hardDriveCapacityDropdown.value + 1); i++) {

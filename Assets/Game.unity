@@ -2452,6 +2452,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 473735210}
+  - component: {fileID: 473735211}
   m_Layer: 0
   m_Name: Servers
   m_TagString: Untagged
@@ -2472,6 +2473,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &473735211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 473735209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddec056f347310b489a141eb8beb5064, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &520878581
 GameObject:
   m_ObjectHideFlags: 0
@@ -9358,7 +9370,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1992689909
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9399,7 +9411,7 @@ MonoBehaviour:
   hostname: {fileID: 728193733}
   serverTypeDropdown: {fileID: 1354921405}
   cpuDropdown: {fileID: 1780796516}
-  softwareOption: {fileID: 181341519}
+  softwareDropdown: {fileID: 181341519}
   hardDriveDropdown: {fileID: 1669967023}
   hardDriveCapacityDropdown: {fileID: 1256785161}
   serverInfoDisplay: {fileID: 1146593993}

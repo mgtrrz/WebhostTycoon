@@ -82,10 +82,12 @@ public class GameManager : MonoBehaviour {
 
 
 	private GameObject customerParent;
+	private ServerParent serverParent;
 
 
 	void Start () {
 		customerParent = GameObject.Find("Customers");
+		serverParent = FindObjectOfType<ServerParent>();
 		/* Initializing our Clock */
 		day = 1;
 		week = 1;
@@ -128,6 +130,7 @@ public class GameManager : MonoBehaviour {
 		if ( day > 28 ) {
 			day = 1;
 			month++;
+			MonthlyTick();
 		}
 
 		if ( ( day == 1 || day == 8 || day == 15 || day == 22 ) && hour == 0 ) {
@@ -142,11 +145,6 @@ public class GameManager : MonoBehaviour {
 			month = 1;
 			year++;
 		}
-
-		UpdateHourDisplay();
-		UpdateDayMonthDisplay();
-		UpdateYearDisplay();
-		UpdateSummarizedDisplay();
 	}
 
 	public void UpdateFundsDisplay() {
@@ -173,12 +171,33 @@ public class GameManager : MonoBehaviour {
 		satisfactionTextbox.text = satisfaction.ToString();
 	}
 
+
+
 	public void Tick() {
-		if (  servers != null ) {
-			foreach (Server server in servers) {
-				server.Tick();
-			}
-		}
+		/* Better to use broadcastmessage? */
+		
+		// if (  servers != null ) {
+		// 	foreach (Server server in servers) {
+		// 		server.Tick();
+		// 	}
+		// }
+
+
+		// Send a message to all of our servers to calculate their things!
+		serverParent.BroadcastTick();
+
+
+		UpdateHourDisplay();
+		UpdateDayMonthDisplay();
+		UpdateYearDisplay();
+		UpdateSummarizedDisplay();
+	}
+	
+
+
+	public void MonthlyTick() {
+		// for our monthly costs!
+		serverParent.BroadcastMonthlyTick();
 	}
 
 	public bool MakePurchase(int amount) {

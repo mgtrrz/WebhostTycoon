@@ -11,16 +11,22 @@ public enum ServerType {
 public class Server : MonoBehaviour {
 
 	public string hostname;
-	public ServerType serverType;
-	public ServerChassis serverChassis;
-	public CPU processor;
-	public List<StorageDrive> hardDrives;
+
+
+	public ServerChassis serverChassis; // The selected enclosure for this server
+	public CPU processor; // The CPU this server is running
+	public List<StorageDrive> hardDrives; // A list of hard drives configured on this server
+	public Software software; // The software running on this server
+
+	public List<Customer> customers; // All the customers on this box (if any)
 
 	/*
-	These are unnecessary
-	public RaidTypes raid;
-	public OperatingSystem os;
+	These are probably unnecessary and may complicate things,
+	but is something to consider for maybe more Expert settings?
 	*/
+	// public RaidTypes raid;
+	// public OperatingSystem os;
+	
 
 	/* Differences:
 		cpuLoad: 0-100% per thread. If a server has 4 threads total (2 cores hyperthreaded = 4 threads = 400% cpuLoad overhead)
@@ -31,20 +37,30 @@ public class Server : MonoBehaviour {
 	*/
 	public float cpuLoad;
 	public float cpuUsage;
-	public float diskUsage;
-	public List<Customer> customers;
 
-	/* Whether to accept new customers onto this box */
-	public bool acceptCustomers;
 
-	/* Max amount of customers allowed on this box */
-	public int maxCustomers;
+	public float diskUsage; // Amount of disk used by customers
 
-	/* Amount of money this server is making from customers on it */
-	public int serverIncome;
 
-	/* Amount of money it costs to run this server */
-	public int serverCosts;
+
+	public bool acceptCustomers; // Whether to accept new customers onto this box
+
+	public int maxCustomers; // Max amount of customers allowed on this box
+
+	public int serverIncome; // Amount of money this server is making from customers on it
+
+	public int serverCosts; // Amount of money it costs to run this server
+
+
+	public bool active; // Wheether this server is turned "on" or "off"
+
+
+	private GameManager gameManager;
+
+	void Start() {
+		gameManager = FindObjectOfType<GameManager>();
+	}
+
 
 	public int hardDriveCapacity {
 		get { 
@@ -108,20 +124,30 @@ public class Server : MonoBehaviour {
 
 	/* ------------------------------------------------ */
 
-	/*
-	public float CurrentCpuUsage {
-		get {
-			foreach
-		}
-	}
 
-	*/
 
-	public void Tick() {
+	public void ServerTick() {
+		// Debug.Log("Server: " + hostname + " got ServerTick broadcast!");
+		// Resources
 		CalculateCpuUsage();
 		CalculateDiskUsage();
+
+		// Money
 		CalculateRevenue();
+		CalculateMonthlyExpenses();
 	}
+
+	public void ServerMonthlyTick() {
+		// Debug.Log("Server: " + hostname + " got MONTHLY ServerTick broadcast!");
+		// Calculating our monthly revenue and expenses
+		gameManager.MakeProfit( serverIncome - serverCosts );
+	}
+
+
+
+
+
+
 
 	public void CalculateCpuUsage() {
 		cpuLoad = 0;
@@ -139,7 +165,12 @@ public class Server : MonoBehaviour {
 		}
 	}
 
+	public void CalculateDiskPercentage() {
+
+	}
+
 	public void CalculateRevenue() {
+		// Money coming into the server from customers
 		serverIncome = 0;
 		foreach (Customer cx in customers) {
 			serverIncome += cx.plan.cost;
@@ -147,12 +178,14 @@ public class Server : MonoBehaviour {
 	}
 
 	public void CalculateMonthlyExpenses() {
-		serverCosts = 200;
+		// Costs to run the server, like software licenses or electricity costs
+		int cost = software.cost;
+		serverCosts = cost;
 	}
 
-	public void CalculateUpfrontExpenses() {
-
-	}
+	// public void CalculateUpfrontExpenses() {
+		
+	// }
 
 
 	public bool isFunctional() {
