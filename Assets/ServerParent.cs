@@ -12,12 +12,12 @@ public class ServerParent : MonoBehaviour {
 	while MonthlyTick is sent once once a new in-game month has started
 	*/
 	public void BroadcastTick() {
-		Debug.Log("Got request to Broadcast Tick to our servers");
+		// Debug.Log("Got request to Broadcast Tick to our servers");
 		BroadcastMessage("ServerTick", SendMessageOptions.DontRequireReceiver );
 	}
 
 	public void BroadcastMonthlyTick() {
-		Debug.Log("Got request to Broadcast the Monthly Tick to our servers");
+		// Debug.Log("Got request to Broadcast the Monthly Tick to our servers");
 		BroadcastMessage("ServerMonthlyTick", SendMessageOptions.DontRequireReceiver );
 	}
 }

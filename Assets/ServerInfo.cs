@@ -29,7 +29,7 @@ public class ServerInfo : MonoBehaviour {
 		}
 		hostname.text = server.hostname;
 		cpuUsage.text = "CPU Usage: " + server.cpuUsage.ToString("0.#\\%");
-		diskUsage.text = "Disk Usage: " + server.diskUsage.ToString("0.#\\%");
+		diskUsage.text = "Disk Usage: " + server.CalculateDiskPercentage().ToString("0.#\\%");
 		customers.text = "Customers: " + server.customers.Count;
 		profit.text = "Profit: $" + (server.serverIncome - server.serverCosts);
 		if ( server.acceptCustomers ) {

@@ -44,15 +44,12 @@ public class Server : MonoBehaviour {
 
 
 	public bool acceptCustomers; // Whether to accept new customers onto this box
-
 	public int maxCustomers; // Max amount of customers allowed on this box
-
 	public int serverIncome; // Amount of money this server is making from customers on it
-
 	public int serverCosts; // Amount of money it costs to run this server
 
 
-	public bool active; // Wheether this server is turned "on" or "off"
+	public bool active; // Whether this server is turned "on" or "off"
 
 
 	private GameManager gameManager;
@@ -165,8 +162,8 @@ public class Server : MonoBehaviour {
 		}
 	}
 
-	public void CalculateDiskPercentage() {
-
+	public float CalculateDiskPercentage() {
+		return ( diskUsage / GetTotalDiskSpace ) * 100;
 	}
 
 	public void CalculateRevenue() {
