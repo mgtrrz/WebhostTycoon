@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
+	const string GameMode = "DEV";
+
 	/* ---------------- */
 	/*       Clock      */
 	/* ---------------- */
@@ -18,6 +20,16 @@ public class GameManager : MonoBehaviour {
 	
 
 	public List<Server> servers;
+
+	/* ------------------ */
+	/*   Player Details   */
+	/* ------------------ */
+	public string playerName;
+	public string companyName;
+	public string domain;
+	public string companyTld; // .com, .org, .net, etc.
+	public string difficulty;
+
 
 	/* ------------------ */
 	/* Player Performance */
@@ -76,6 +88,13 @@ public class GameManager : MonoBehaviour {
 		month = 1;
 		year = 1;
 		funds = 10000;
+
+		if ( GameMode == "DEV" ) {
+			playerName = "Marcus Gutierrez";
+			companyName = "LoudServers";
+			domain = "loudservers";
+			companyTld = ".com";
+		}
 
 
 		UpdateFundsDisplay();

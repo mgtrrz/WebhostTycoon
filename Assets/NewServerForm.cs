@@ -131,7 +131,7 @@ public class NewServerForm : MonoBehaviour {
 		var newServer = Instantiate(serverPrefab, Vector2.zero, Quaternion.identity, serverParent.transform) as GameObject;
 		var serverComponent = newServer.GetComponent<Server>();
 
-		serverComponent.hostname = hostname.text;
+		serverComponent.hostname = hostname.text + "." + gameManager.domain + gameManager.companyTld;
 		serverComponent.serverChassis = gameManager.allServerChassis[serverTypeDropdown.value];
 		serverComponent.processor = gameManager.allCpus[cpuDropdown.value];
 		serverComponent.acceptCustomers = true;
