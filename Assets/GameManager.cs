@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class GameManager : MonoBehaviour {
 
 	const string GameMode = "DEV";
@@ -17,6 +18,8 @@ public class GameManager : MonoBehaviour {
 	public int year;
 	public float timeInterval;
 	public float counter; /* MAKE PRIVATE */
+
+	public List<string> months = new List<string>() {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 	
 
 	public List<Server> servers;
@@ -87,7 +90,7 @@ public class GameManager : MonoBehaviour {
 		week = 1;
 		month = 1;
 		year = 1;
-		funds = 10000;
+		funds = 1000;
 
 		if ( GameMode == "DEV" ) {
 			playerName = "Marcus Gutierrez";
@@ -154,7 +157,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void UpdateDayMonthDisplay() {
-		dayMonthTextbox.text = day + "/" + month;
+		dayMonthTextbox.text = months[month - 1] + " " + day ;
 	}
 	
 	public void UpdateYearDisplay() {
