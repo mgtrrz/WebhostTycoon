@@ -26,7 +26,7 @@ public class NewServerForm : MonoBehaviour {
 	List<string> cpuTypes = new List<string>();
 	List<string> hardDriveTypes = new List<string>();
 	List<string> hardDriveCapacityTypes = new List<string>();
-	List<string> software = new List<string>() {"cPanel"};
+	List<string> software = new List<string>();
 
 	// Use this for initialization
 	void Start () {
@@ -45,6 +45,10 @@ public class NewServerForm : MonoBehaviour {
 			hardDriveTypes.Add(hd.name + " ($" + hd.cost + ")");
 		}
 
+		foreach ( Software sw in gameManager.allSoftware ) {
+			software.Add(sw.name + " ($" + sw.cost + "/mo)");
+		}
+
 
 		serverTypeDropdown.ClearOptions();
 		serverTypeDropdown.AddOptions(serverTypes);
@@ -57,6 +61,7 @@ public class NewServerForm : MonoBehaviour {
 
 		hardDriveDropdown.ClearOptions();
 		hardDriveDropdown.AddOptions(hardDriveTypes);
+		
 
 		UpdateHdCapacity();
 	}
@@ -108,6 +113,7 @@ public class NewServerForm : MonoBehaviour {
 			cost += gameManager.allCpus[cpuDropdown.value].cost;
 			cost += gameManager.allServerChassis[serverTypeDropdown.value].cost;
 			cost += gameManager.allStorageDrives[hardDriveDropdown.value].cost * ( hardDriveCapacityDropdown.value + 1 );
+			cost += gameManager.allSoftware[softwareOption.value].cost;
 
 			return cost;
 		}
@@ -115,8 +121,10 @@ public class NewServerForm : MonoBehaviour {
 
 	public int MonthlyRentalCost {
 		get { 
+			int cost = 0;
+			cost += gameManager.allSoftware[softwareOption.value].cost;
 
-			return 0;
+			return cost;
 		}
 	}
 

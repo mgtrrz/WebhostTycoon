@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour {
 	public List<StorageDrive> allStorageDrives;
 	public List<CustomerType> allCustomerTypes;
 	public List<Plan> allPlans;
+	public List<Software> allSoftware;
 	public Server serverPrefab;
 	public Customer customerPrefab;
 
