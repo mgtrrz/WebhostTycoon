@@ -29,6 +29,8 @@ public class Customer : MonoBehaviour {
 
 	private GameManager gameManager;
 
+	private Server customerServer;
+
 	// Use this for initialization
 	void Start () {
 		gameManager = FindObjectOfType<GameManager>();
@@ -42,7 +44,7 @@ public class Customer : MonoBehaviour {
 	}
 
 	public void CustomerTick() {
-
+		print(gameObject);
 		CalculateCpuUsage();
 		CalculateDiskUsage();
 
@@ -52,6 +54,12 @@ public class Customer : MonoBehaviour {
 
 	}
 
+
+	public void CalculateCustomerSatisfaction(float cpuUsage, float diskUsage, bool isFunctional) {
+		// Check to see how their server is doing
+		// We want to also check how their interactions with support has been
+
+	}
 
 	private void CalculateCpuUsage() {
 		/* Calculating this customer's CPU usage */

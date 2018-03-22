@@ -218,6 +218,11 @@ public class GameManager : MonoBehaviour {
 		UpdateFundsDisplay();
 	}
 
+
+	public void CalculateCustomerTraction() {
+		// Determining if we get a customer in this tick
+	}
+
 	public void AddCustomer() {
 		// Check to see if we have any servers first
 		Server serverToUse = null;

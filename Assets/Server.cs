@@ -141,7 +141,11 @@ public class Server : MonoBehaviour {
 	}
 
 
-
+	public void BroadcastServerPerformance() {
+		foreach (Customer cx in customers) {
+			cx.CalculateCustomerSatisfaction(cpuUsage, diskUsage, isFunctional());
+		}
+	}
 
 
 
