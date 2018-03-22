@@ -81,12 +81,12 @@ public class GameManager : MonoBehaviour {
 
 
 
-	private GameObject customerParent;
+	private CustomerParent customerParent;
 	private ServerParent serverParent;
 
 
 	void Start () {
-		customerParent = GameObject.Find("Customers");
+		customerParent = FindObjectOfType<CustomerParent>();
 		serverParent = FindObjectOfType<ServerParent>();
 		/* Initializing our Clock */
 		day = 1;
@@ -185,7 +185,8 @@ public class GameManager : MonoBehaviour {
 
 		// Send a message to all of our servers to calculate their things!
 		serverParent.BroadcastTick();
-
+		// And our customers
+		customerParent.BroadcastTick();
 
 		UpdateHourDisplay();
 		UpdateDayMonthDisplay();
@@ -198,6 +199,7 @@ public class GameManager : MonoBehaviour {
 	public void MonthlyTick() {
 		// for our monthly costs!
 		serverParent.BroadcastMonthlyTick();
+		customerParent.BroadcastMonthlyTick();
 	}
 
 	public bool MakePurchase(int amount) {
