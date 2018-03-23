@@ -39,4 +39,8 @@ public class ServerDetails : MonoBehaviour {
 										 server.diskUsage + " GB / " + server.GetTotalDiskSpace + " GB" + "\n" +
 										 server.CalculateDiskPercentage() + "%";
 	}
+
+	public void CloseServerDetailsWindow() {
+		Destroy(gameObject);
+	}
 }
