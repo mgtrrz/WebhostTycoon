@@ -132,6 +132,8 @@ public class Server : MonoBehaviour {
 		// Money
 		CalculateRevenue();
 		CalculateMonthlyExpenses();
+
+		BroadcastServerPerformance();
 	}
 
 	public void ServerMonthlyTick() {
@@ -143,7 +145,7 @@ public class Server : MonoBehaviour {
 
 	public void BroadcastServerPerformance() {
 		foreach (Customer cx in customers) {
-			cx.CalculateCustomerSatisfaction(cpuUsage, diskUsage, isFunctional());
+			cx.CalculateCustomerSatisfaction(cpuUsage, CalculateDiskPercentage(), isFunctional());
 		}
 	}
 

@@ -25,6 +25,13 @@ public class Customer : MonoBehaviour {
 	public float churn;
 	public int nps;
 
+
+
+	private int tickTimer;
+
+	private int isExperiencingIssues;
+	private int isHavingNoIssues;
+
 	public CustomerType cxType;
 
 	private GameManager gameManager;
@@ -44,14 +51,21 @@ public class Customer : MonoBehaviour {
 	}
 
 	public void CustomerTick() {
-		print(gameObject);
 		CalculateCpuUsage();
 		CalculateDiskUsage();
 
+		if ( isExperiencingIssues > 0 ) {
+			isExperiencingIssues -= 1;
+		}
+	}
+
+	public void CustomerDailyTick() {
+		
+		isHavingNoIssues++;
 	}
 
 	public void CustomerMonthlyTick() {
-
+		
 	}
 
 
@@ -59,6 +73,69 @@ public class Customer : MonoBehaviour {
 		// Check to see how their server is doing
 		// We want to also check how their interactions with support has been
 
+		if ( isExperiencingIssues == 0 ) { 
+
+			if ( !isFunctional ) { // Server is basically offline
+				modifySatisfaction(-18);
+				isExperiencingIssues = 10;
+				isHavingNoIssues = 0;
+				return;
+			} else if ( cpuUsage > 90f ) { // Major server issues, services are crashing and sites may be down
+				
+				if ( Random.Range(1,100) > 60 ) {
+					modifySatisfaction(-14);
+					isExperiencingIssues = 12;
+					isHavingNoIssues = 0;
+				}
+				return;
+			} else if ( cpuUsage > 75f ) { // Major server issues, sites may be slow to respond
+
+				if ( Random.Range(1,200) > 155 ) {
+					modifySatisfaction(-9);
+					isExperiencingIssues = 12;
+					isHavingNoIssues = 0;
+				}
+				return;
+			} else if ( cpuUsage > 62f ) { // Customer is seeing issues but it's intermittent
+
+				if ( Random.Range(1,200) > 175 ) {
+					modifySatisfaction(-4);
+					// We need to wait some time, otherwise, this will just keep relentlessly lowering the customer
+					// satisfaction
+					isExperiencingIssues = 12;
+					isHavingNoIssues = 0;
+				}
+				return;
+			} else if ( diskUsage >= 100 ) { // Services can't work when disk usage is full
+				modifySatisfaction(-20);
+				isExperiencingIssues = 10;
+				isHavingNoIssues = 0;
+				return;
+			}
+		}
+
+
+		// This is where we calculate happiness. Otherwise, things are going good, let's update our
+		// satisfaction slowly over time.
+		if ( isExperiencingIssues == 0 ) {
+
+			if ( isHavingNoIssues == 2) {
+				modifySatisfaction(5);
+				isHavingNoIssues = 0;
+			}
+
+		}
+
+	}
+
+	private void modifySatisfaction(int amount) {
+		satisfaction += amount;
+
+		if ( satisfaction > 100 ) {
+			satisfaction = 100;
+		} else if ( satisfaction < 0 ) {
+			satisfaction = 0;
+		}
 	}
 
 	private void CalculateCpuUsage() {

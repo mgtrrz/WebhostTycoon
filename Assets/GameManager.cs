@@ -111,7 +111,6 @@ public class GameManager : MonoBehaviour {
 
 		if ( counter <= 0 ) {
 			TickClock();
-			Tick();
 			counter = timeInterval;
 		}
 
@@ -125,6 +124,7 @@ public class GameManager : MonoBehaviour {
 		if ( hour > 23 ) {
 			day++;
 			hour = 0;
+			DailyTick();
 		}
 
 		if ( day > 28 ) {
@@ -145,6 +145,8 @@ public class GameManager : MonoBehaviour {
 			month = 1;
 			year++;
 		}
+
+		Tick();
 	}
 
 	public void UpdateFundsDisplay() {
@@ -194,7 +196,9 @@ public class GameManager : MonoBehaviour {
 		UpdateSummarizedDisplay();
 	}
 	
-
+	public void DailyTick() {
+		customerParent.BroadcastDailyTick();
+	}
 
 	public void MonthlyTick() {
 		// for our monthly costs!

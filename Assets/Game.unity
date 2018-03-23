@@ -4000,7 +4000,7 @@ MonoBehaviour:
   week: 0
   month: 0
   year: 0
-  timeInterval: 0.4
+  timeInterval: 1
   counter: 0
   months:
   - Jan

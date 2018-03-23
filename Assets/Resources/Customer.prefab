@@ -62,7 +62,7 @@ MonoBehaviour:
   dayJoined: 0
   monthJoined: 0
   yearJoined: 0
-  satisfaction: 0
+  satisfaction: 50
   churn: 0
   nps: 0
   cxType: {fileID: 0}

@@ -13,4 +13,8 @@ public class CustomerParent : MonoBehaviour {
 		// Debug.Log("Got request to Broadcast the Monthly Tick to our servers");
 		BroadcastMessage("CustomerMonthlyTick", SendMessageOptions.DontRequireReceiver );
 	}
+
+	public void BroadcastDailyTick() {
+		BroadcastMessage("CustomerDailyTick", SendMessageOptions.DontRequireReceiver );
+	}
 }
