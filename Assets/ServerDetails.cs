@@ -36,8 +36,10 @@ public class ServerDetails : MonoBehaviour {
 		
 		serverDetailsRightTextbox.text = "n/a" + "\n" +
 										 "n/a" + "\n" +
-										 server.diskUsage + " GB / " + server.GetTotalDiskSpace + " GB" + "\n" +
-										 server.CalculateDiskPercentage() + "%";
+										 server.diskUsage.ToString("0.#\\") + " GB / " + server.GetTotalDiskSpace + " GB" + "\n" +
+										 server.CalculateDiskPercentage().ToString("0.#\\%") + "\n\n" +
+										 GameDate.GetMonthNameFromInt(server.originalBuildDate["Month"]) + " " + server.originalBuildDate["Day"] + " Year: " + server.originalBuildDate["Year"] + "\n" +
+										 "$" + server.originalServerCost;
 	}
 
 	public void CloseServerDetailsWindow() {

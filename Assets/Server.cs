@@ -36,7 +36,7 @@ public class Server : MonoBehaviour {
 		To make things simple, we're probably only going to show cpuUsage to players.
 	*/
 	public float cpuLoad;
-	public float cpuUsage;
+	public float cpuUsage; // Percentage based 0-100%
 
 
 	public float diskUsage; // Amount of disk used by customers
@@ -48,6 +48,10 @@ public class Server : MonoBehaviour {
 	public int serverIncome; // Amount of money this server is making from customers on it
 	public int serverCosts; // Amount of money it costs to run this server
 	public int serverCustomerSatisfaction; // How happy customers are of server performance on average
+
+	public int originalServerCost;
+	public Dictionary<string, int> originalBuildDate; // "Month" = 1, "Day" = 1, "Year" = 1
+	public List<float> cpuUsageOverTime;
 
 	public bool active; // Whether this server is turned "on" or "off"
 

@@ -143,6 +143,10 @@ public class NewServerForm : MonoBehaviour {
 		serverComponent.serverChassis = gameManager.allServerChassis[serverTypeDropdown.value];
 		serverComponent.processor = gameManager.allCpus[cpuDropdown.value];
 		serverComponent.software = gameManager.allSoftware[softwareDropdown.value];
+
+		serverComponent.originalServerCost = UpfrontCost;
+		serverComponent.originalBuildDate = gameManager.GetCurrentGameDate();
+
 		serverComponent.acceptCustomers = true;
 
 		for(int i = 1; i <= (hardDriveCapacityDropdown.value + 1); i++) {

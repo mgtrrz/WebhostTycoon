@@ -17,10 +17,7 @@ public class GameManager : MonoBehaviour {
 	private int month;
 	private int year;
 	public float timeInterval;
-	private float counter; /* MAKE PRIVATE */
-
-	private List<string> months = new List<string>() {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
-	
+	private float counter; /* MAKE PRIVATE */	
 
 	public List<Server> servers;
 
@@ -64,6 +61,7 @@ public class GameManager : MonoBehaviour {
 	[Space]
 	[Space]
 	[Header("UI Elements")]
+	public Text websiteName;
 	public Text fundsTextbox;
 	public Text hourTextbox;
 	public Text dayMonthTextbox;
@@ -158,7 +156,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void UpdateDayMonthDisplay() {
-		dayMonthTextbox.text = months[month - 1] + " " + day ;
+		dayMonthTextbox.text = GameDate.GetMonthNameFromInt(month)  + " " + day;
 	}
 	
 	public void UpdateYearDisplay() {
@@ -166,6 +164,8 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void UpdateSummarizedDisplay() {
+		websiteName.text = domain + companyTld;
+
 		totalCustomersTextbox.text = customerParent.transform.childCount.ToString();
 		totalServersTextbox.text = servers.Count.ToString();
 
@@ -241,6 +241,14 @@ public class GameManager : MonoBehaviour {
 	
 	private void CalculateCustomerPopularity() {
 
+	}
+
+	public Dictionary<string, int> GetCurrentGameDate() {
+		var dateDict = new Dictionary<string, int>();
+		dateDict.Add("Month", month);
+		dateDict.Add("Day", day);
+		dateDict.Add("Year", year);
+		return dateDict;
 	}
 
 	public void AddCustomer() {
