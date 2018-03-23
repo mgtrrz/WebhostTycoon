@@ -176,19 +176,13 @@ public class GameManager : MonoBehaviour {
 
 
 	public void Tick() {
-		/* Better to use broadcastmessage? */
-		
-		// if (  servers != null ) {
-		// 	foreach (Server server in servers) {
-		// 		server.Tick();
-		// 	}
-		// }
-
 
 		// Send a message to all of our servers to calculate their things!
 		serverParent.BroadcastTick();
 		// And our customers
 		customerParent.BroadcastTick();
+
+		CalculateCustomerSatisfaction();
 
 		UpdateHourDisplay();
 		UpdateDayMonthDisplay();
@@ -225,6 +219,23 @@ public class GameManager : MonoBehaviour {
 
 	public void CalculateCustomerTraction() {
 		// Determining if we get a customer in this tick
+	}
+
+	private void CalculateCustomerSatisfaction() {
+		if ( customerParent.transform.childCount == 0 ) {
+			return;
+		}
+
+		int totalSatisfaction = 0;
+		foreach (Transform customerGameObject in customerParent.transform) {
+			totalSatisfaction += customerGameObject.GetComponent<Customer>().satisfaction;
+		}
+
+		satisfaction = totalSatisfaction / customerParent.transform.childCount;
+	}
+	
+	private void CalculateCustomerPopularity() {
+
 	}
 
 	public void AddCustomer() {

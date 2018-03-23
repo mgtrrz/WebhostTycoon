@@ -118,10 +118,12 @@ public class Customer : MonoBehaviour {
 		// This is where we calculate happiness. Otherwise, things are going good, let's update our
 		// satisfaction slowly over time.
 		if ( isExperiencingIssues == 0 ) {
-
-			if ( isHavingNoIssues == 2) {
-				modifySatisfaction(5);
-				isHavingNoIssues = 0;
+			
+			if ( Random.Range(1,200) > 148 ) {
+				if ( isHavingNoIssues >= 2) {
+					modifySatisfaction(5);
+					isHavingNoIssues = 0;
+				}
 			}
 
 		}
