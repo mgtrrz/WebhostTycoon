@@ -47,7 +47,7 @@ public class Server : MonoBehaviour {
 	public int maxCustomers; // Max amount of customers allowed on this box
 	public int serverIncome; // Amount of money this server is making from customers on it
 	public int serverCosts; // Amount of money it costs to run this server
-
+	public int serverCustomerSatisfaction; // How happy customers are of server performance on average
 
 	public bool active; // Whether this server is turned "on" or "off"
 
@@ -150,7 +150,13 @@ public class Server : MonoBehaviour {
 	}
 
 
-
+	private void CalculateCustomerSatisfaction() {
+		int cxSatisfaction = 0;
+		foreach (Customer cx in customers) {
+			cxSatisfaction += cx.satisfaction;
+		}
+		serverCustomerSatisfaction = cxSatisfaction / customers.Count;
+	}
 
 	public void CalculateCpuUsage() {
 		cpuLoad = 0;

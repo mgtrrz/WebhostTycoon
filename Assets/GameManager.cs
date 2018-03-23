@@ -11,15 +11,15 @@ public class GameManager : MonoBehaviour {
 	/* ---------------- */
 	/*       Clock      */
 	/* ---------------- */
-	public int hour;
-	public int day;
-	public int week;
-	public int month;
-	public int year;
+	private int hour;
+	private int day;
+	private int week;
+	private int month;
+	private int year;
 	public float timeInterval;
-	public float counter; /* MAKE PRIVATE */
+	private float counter; /* MAKE PRIVATE */
 
-	public List<string> months = new List<string>() {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+	private List<string> months = new List<string>() {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 	
 
 	public List<Server> servers;
@@ -32,15 +32,15 @@ public class GameManager : MonoBehaviour {
 	public string domain;
 	public string companyTld; // .com, .org, .net, etc.
 	public string difficulty;
-
+	public bool acceptingCustomers;
 
 	/* ------------------ */
 	/* Player Performance */
 	/* ------------------ */
-	public int funds;
-	public float popularity;
-	public int satisfaction;
-	public int nps;
+	private int funds;
+	private float popularity;
+	private int satisfaction;
+	private int nps;
 
 	/* ---------------- */
 	/*      Prefabs     */
@@ -182,6 +182,7 @@ public class GameManager : MonoBehaviour {
 		// And our customers
 		customerParent.BroadcastTick();
 
+		CalculateCustomerTraction();
 		CalculateCustomerSatisfaction();
 
 		UpdateHourDisplay();
@@ -218,7 +219,11 @@ public class GameManager : MonoBehaviour {
 
 
 	public void CalculateCustomerTraction() {
+
 		// Determining if we get a customer in this tick
+		if ( Random.Range(0, 9000) > 8710 ) {
+			AddCustomer();
+		}
 	}
 
 	private void CalculateCustomerSatisfaction() {
@@ -239,9 +244,14 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void AddCustomer() {
+		if (!acceptingCustomers) { // if we're not accepting customers, bounce outta here
+			return;
+		}
+
 		// Check to see if we have any servers first
 		Server serverToUse = null;
-		if ( servers != null ) {
+
+		if ( servers != null && servers.Count != 0 ) {
 			// Iterate through those servers
 			foreach(Server server in servers) {
 				// If the server is accepting customers..
@@ -260,17 +270,17 @@ public class GameManager : MonoBehaviour {
 				}
 			}
 
-		GameObject serverParent = GameObject.Find("Customers");
-		// Add them in there
-		Customer customer = Instantiate(customerPrefab, Vector3.zero, Quaternion.identity, serverParent.transform);
-		customer.customerName = "Sweaty Palms";
-		customer.cxType = CalculateCustomerType();
+			GameObject serverParent = GameObject.Find("Customers");
+			// Add them in there
+			Customer customer = Instantiate(customerPrefab, Vector3.zero, Quaternion.identity, serverParent.transform);
+			customer.customerName = "Sweaty Palms";
+			customer.cxType = CalculateCustomerType();
 
-		// Picking a plan at random for now
-		int iRand = Random.Range(0, allPlans.Count);
-		customer.plan = allPlans[iRand];
+			// Picking a plan at random for now
+			int iRand = Random.Range(0, allPlans.Count);
+			customer.plan = allPlans[iRand];
 
-		serverToUse.customers.Add(customer);
+			serverToUse.customers.Add(customer);
 
 		}
 	}
@@ -283,11 +293,11 @@ public class GameManager : MonoBehaviour {
 		}
 		*/
 		int randInt = Random.Range(1,100);
-		if ( randInt < 78 ) {
+		if ( randInt < 84 ) {
 			return allCustomerTypes[0];
-		} else if ( randInt < 86 ) {
+		} else if ( randInt < 92 ) {
 			return allCustomerTypes[1];
-		} else if ( randInt < 94 ) {
+		} else if ( randInt < 97 ) {
 			return allCustomerTypes[2];
 		} else {
 			return allCustomerTypes[3];

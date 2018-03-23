@@ -194,6 +194,11 @@ public class Customer : MonoBehaviour {
 		if ( diskUsage > plan.diskSpace && plan.diskSpaceHardLimit ) {
 			diskUsage = plan.diskSpace;
 		} 
+
+		// We can't have negative space, so let's just generate a random low number
+		if ( diskUsage <= 0 ) {
+			diskUsage = Random.Range(0f, 0.50f);
+		}
 	}
 
 

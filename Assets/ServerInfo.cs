@@ -13,9 +13,10 @@ public class ServerInfo : MonoBehaviour {
 	public Text accepting;
 
 	public Server server;
+
+	public GameObject editServerUI;
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame
@@ -37,5 +38,10 @@ public class ServerInfo : MonoBehaviour {
 		} else {
 			accepting.text = "Accepting: No";
 		}
+	}
+
+	public void EditServerUI() {
+		GameObject serverUI = Instantiate(editServerUI, Vector3.zero, Quaternion.identity, GameObject.Find("Canvas").transform);
+		serverUI.GetComponent<ServerDetails>().server = server;
 	}
 }
