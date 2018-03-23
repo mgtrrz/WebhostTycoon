@@ -137,6 +137,8 @@ public class Server : MonoBehaviour {
 		CalculateRevenue();
 		CalculateMonthlyExpenses();
 
+		CalculateCustomerSatisfaction();
+
 		BroadcastServerPerformance();
 	}
 
@@ -155,6 +157,9 @@ public class Server : MonoBehaviour {
 
 
 	private void CalculateCustomerSatisfaction() {
+		if ( customers.Count == 0 ) {
+			return;
+		}
 		int cxSatisfaction = 0;
 		foreach (Customer cx in customers) {
 			cxSatisfaction += cx.satisfaction;
