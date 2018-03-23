@@ -153,8 +153,8 @@ public class Customer : MonoBehaviour {
 	}
 
 	private void CalculateDiskUsage() {
-		// Calculate first time usage
-		if ( diskUsage == 0 ) {
+
+		if ( diskUsage == 0 ) { // Calculate first time usage
 			// This is the percentage of the plan's allotted disk usage.
 			// e.g. 10 GB limit, 5% of 10 GB is 0.5 GB
 			diskUsage = Random.Range( plan.diskSpace * (cxType.minDiskUsage / 100) , plan.diskSpace * (cxType.maxDiskUsage / 100) );
@@ -171,10 +171,10 @@ public class Customer : MonoBehaviour {
 				}
 
 				// Calculating an amount for adding usage
-				float additionalUsage = Random.Range( cxType.minDiskUsage , (plan.diskSpace * (cxType.maxDiskUsage / 100) ) / 8 );
+				float additionalUsage = Random.Range( 0f , 2f );
 
 				// We're more likely to ADD files than we are delete 
-				if ( Random.Range(1,100) <= 70 ) {
+				if ( Random.Range(1,100) <= 60 ) {
 					diskUsage += additionalUsage;
 				} else {
 					diskUsage -= additionalUsage;
