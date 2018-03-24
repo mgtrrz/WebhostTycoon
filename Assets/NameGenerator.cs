@@ -14,7 +14,7 @@ public class NameGenerator {
 		"Henry", "Carl", "Ryan", "Roger", "Joe", "Juan", "Justin", "Jonathan", "Terry", "Keith", "Sam", "Samuel", "Will", "Ben", "Bob", "Jon", "Oliver",
 		"Bobby", "Shawn", "Clarence", "Craig", "Todd", "Phillip", "Phil", "Randy", "Howard", "Eugene", "Javier", "Jordan", "Guy", "Cody", "Ted",
 		"Darren", "Tyrone", "Darryl", "Cory", "Adrian", "Jaime", "Wade", "Cecil", "Luke", "Nolan", "Dustin", "Nate", "Nathan", "Zach", "Zachary", "Sleve",
-		"Onson", "Mario", "Tony", "Jeromy", "Dwight", "Dwigt", "Bobson",
+		"Onson", "Mario", "Tony", "Jeromy", "Dwight", "Dwigt", "Bobson"
 	};
 
 	private static string[] femaleNames = {
@@ -42,7 +42,61 @@ public class NameGenerator {
 	};
 
 	private static string[] specialNames = {
+		"Marcus Gutierrez", "Ben Eaton", "Tomas Borosko"
+	};
 
+	private static string[] adjectives = {
+		"able", "absolute", "accomplished", "acclaimed", "adventurous", "admirable", "afraid", "adored", "aggressive", "agile", "alarmed", "amazing", "angelic",
+		"ancient", "anxious", "artistic", "athletic", "awkward", "awesome", "authentic", "attractive",
+		"babyish", "barren", "basic", "beloved", "best", "bitter", "blank", "blissful", "blushing", "bogus", "bold", "bouncy", "brave", "brilliant", "bubbly",
+		"bustling", "buttery",
+		"calculating", "calm", "cautious", "careful", "caring", "cheap", "cheery", "cheerful", "clever", "cloudy", "colorful", "colorless", "comfortable", "common",
+		"complex", "complicated", "considerate", "conventional", "corny", "courageous", "corrupt", "creamy", "creepy", "cultured", "critical", "cuddly", "curvy", 
+		"cute", "cruel",
+		"damaged", "dangerous", "dapper", "daring", "deadly", "decent", "delicious", "delayed", "defiant", "delightful", "delirious", "demanding", "dependable",
+		"determined", "difficult", "discrete", "disastrous", "dismal", "distant", "disguised", "distant", "dizzy", "dramatic", "distributed", "dynamic",
+		"eager", "earnest", "edible", "educated", "elaborate", "elastic", "elementary", "embarrased", "emotional", "empty", "enraged", "envious", "excellent",
+		"exhausted", "excitable", "efficient", "enterprise", "extensible",
+		"fabulous", "faint", "familiar", "famous", "fantastic", "fast", "favorable", "fearful", "feisty", "fickle", "filthy", "firm", "flaky", "flamboyant", "flashy",
+		"flimsy", "flippant", "focused", "flustered", "forceful", "foolish", "frail", "fragrant", "fresh", "friendly", "frilly", "frozen", "fumbling", "fuzzy",
+		"gargantuan", "gaseous", "gentle", "giant", "gifted", "giving", "glooming", "glorious", "gorgeous", "graceful", "greedy", "grim", "gross", "growing", "grubby",
+		"gullible", "global", "granular",
+		"hairy", "handsome", "handmade", "happy", "harmful", "harmless", "harsh", "healthy", "heavenly", "helpful", "hidden", "hilarious", "hollow", "honest", "honorable",
+		"hopeful", "hot", "humble", "humiliating", "hungry", "husky",
+		"icky", "ideal", "identical", "illegal", "idiotic", "illiterate", "imaginary", "immediate", "impeccable", "imperfect", "impolite", "important", "impractical",
+		"impressive", "impure", "incompatible", "incredible", "infamous", "inferior", "innocent", "intelligent", "international", "irresponsible", 
+		"jaded", "jagged", "jealous", "jolly", "joyful", "judicious", "jumbo", "juicy", "junior",
+		"kindhearted", "klutzy", "knowledgeable", "knowing",
+		"lame", "lanky", "lasting", "lavish", "lazy", "legitimate", "likable", "lively", "lonely", "loud", "low", "lengthy", "lucky", "loyal", "luxurious",
+		"mad", "magnificent", "marvelous", "massive", "meager", "meaty", "meek", "mellow", "melodic", "menacing", "messy", "milky", "mindless", "miserable", "modern",
+		"moist", "moral", "motionless", "muddy", "mundane", "mushy", "mysterious",
+		"naive", "nautical", "naughty", "necessary", "neglected", "nervous", "nifty", "nocturnal", "noisy", "noxious", "nutritious",
+		"obedient", "oily", "obvious", "odd", "offensive", "optimal", "organic", "ordinary", "original", "outstanding", 
+		"palatable", "pale", "passionate", "peaceful", "perfect", "perky", "pessimistic", "plain", "pleasant", "plump", "polished", "polite", "pointless", "popular",
+		"positive", "powerful", "practical", "pretty", "precious", "pricey", "pristine", "profitable", "pushy", "prudent", "puzzled",
+		"quaint", "qualified", "queasy", "questionable", "quirky",
+		"radiant", "ragged", "recent", "reasonable", "remarkable", "reliable", "responsible", "respectful", "repulsive", "revolving", "rewarding", "rigid", "roasted",
+		"rotating", "rowdy", "royal", "rubbery", "rusty", "revolutionary", "seamless", "robust",
+		"salty", "sarcastic", "satisfied", "scared", "scholarly", "scrawny", "selfish", "serious", "shallow", "shocking", "shameless", "sikly", "silly", "simplistic",
+		"sinful", "sleepy", "slippery", "smug", "snarling", "sneaky", "soggy", "somber", "soulful", "sparkling", "spectacular", "spicy", "spirited", "spotless",
+		"square", "standard", "sticky", "stimulating", "stormy", "strange", "strong", "stupdenous", "stupid", "submissive", "subtle", "suburban", "supportive", 
+		"sweaty", "sweet", "sweltering", "sympathetic", "superior", 
+		"tasty", "tedious", "tempting", "tender", "terrible", "terrific", "thankful", "thick", "thirsty", "tired", "tremendous", "tragic", "tricky", "trustworthy",
+		"truthful", "transparent", 
+		"ugly", "ultimate", "unacceptable", "uncommon", "uneven", "unfinished", "unfortunate", "unhappy", "unique", "unkempt", "unknown", "unlucky", "unrealistic",
+		"unripe", "unruly", "unusual", "unwilling", "upset", "useless",
+		"vacant", "valuable", "vengeful", "vibrant", "victorious", "vigorous", "violent", "virtual", "visible", "vivid", "verticle", "wireless",
+		"warped", "wasteful", "wealthy", "weepy", "wet", "whispered", "whopping", "wicked", "wiggly", "winding", "wise", "wobbly", "wonderful", "worldly", "worried",
+		"worthwhile", 
+		"zaelous", "zesty"
+	};
+
+	private static string[] nouns = {
+		"servers", "wreck", "applications", "architectures", "channels", "communities", "content", "deliverables", "metrics", "models", "network", "blockchain", "platforms",
+		"portals", "synergies", "schemas", "solutions", "technologies", "computers", "switches", "routers", "ajax", "cloud", "space", "speed", "revolvers", "ideas", "systems",
+		"data", "backups", "partnerships", "users", "art", "music", "food", "theory", "problem", "software", "internet", "cables", "media", "security", "keyboards", "laptops", 
+		"floorboards", "profits", "clocks", "cooling", "customers", "managers", "books", "shield", "firewall", "containers", "machines", "humans", "robots", "cameras", "cells",
+		"pdfs", "docs", "phone", "magazine", "category", "database", "inflation", "advice", "business", "game", "economy"
 	};
 
 	public static string generateRandomName(string gender) {
@@ -54,7 +108,19 @@ public class NameGenerator {
 		}
 
 		string lastName = lastNames[Random.Range(0, lastNames.Length)]; 
-		
+
 		return firstName + " " + lastName;
+	}
+
+	public static string hostnameGenerator() {
+		return adjectives[Random.Range(0, adjectives.Length+1)] + "-" + nouns[Random.Range(0, nouns.Length+1)];
+	}
+
+	public static string randomAdjective() {
+		return adjectives[Random.Range(0, adjectives.Length+1)];
+	}
+
+	public static string randomNoun() {
+		return nouns[Random.Range(0, nouns.Length+1)];
 	}
 }

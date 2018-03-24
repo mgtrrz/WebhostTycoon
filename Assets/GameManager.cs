@@ -281,7 +281,14 @@ public class GameManager : MonoBehaviour {
 			GameObject serverParent = GameObject.Find("Customers");
 			// Add them in there
 			Customer customer = Instantiate(customerPrefab, Vector3.zero, Quaternion.identity, serverParent.transform);
-			customer.customerName = "Sweaty Palms";
+
+			string[] gender = new string[] {"male", "female"};
+
+			string randGend = gender[Random.Range(0,2)];
+
+			customer.age = Random.Range(18, 115);
+
+			customer.customerName = NameGenerator.generateRandomName(randGend);
 			customer.cxType = CalculateCustomerType();
 
 			// Picking a plan at random for now
