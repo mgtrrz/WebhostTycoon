@@ -62,8 +62,13 @@ public class NewServerForm : MonoBehaviour {
 		hardDriveDropdown.ClearOptions();
 		hardDriveDropdown.AddOptions(hardDriveTypes);
 		
+		hostname.text = NameGenerator.hostnameGenerator();
 
 		UpdateHdCapacity();
+	}
+
+	public void OnEnable() {
+		hostname.text = NameGenerator.hostnameGenerator();
 	}
 
 	public void UpdateHdCapacity() {
