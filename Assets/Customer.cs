@@ -16,9 +16,7 @@ public class Customer : MonoBehaviour {
 	public int sites;
 
 
-	public int dayJoined;
-	public int monthJoined;
-	public int yearJoined;
+	public Dictionary<string, int> dateJoined;
 
 
 	public int satisfaction;
@@ -31,12 +29,14 @@ public class Customer : MonoBehaviour {
 
 	private int isExperiencingIssues;
 	private int isHavingNoIssues;
+	private int cancelThreshold;
+
 
 	public CustomerType cxType;
 
 	private GameManager gameManager;
 
-	private Server customerServer;
+	public Server myServer;
 
 	// Use this for initialization
 	void Start () {
@@ -57,11 +57,14 @@ public class Customer : MonoBehaviour {
 		if ( isExperiencingIssues > 0 ) {
 			isExperiencingIssues -= 1;
 		}
+
+		CancelDecision();
+		CheckIfAccountNoLongerNeeded();
 	}
 
 	public void CustomerDailyTick() {
-		
 		isHavingNoIssues++;
+		CalculateCancellationIndex();
 	}
 
 	public void CustomerMonthlyTick() {
@@ -76,14 +79,14 @@ public class Customer : MonoBehaviour {
 		if ( isExperiencingIssues == 0 ) { 
 
 			if ( !isFunctional ) { // Server is basically offline
-				modifySatisfaction(-18);
+				ModifySatisfaction(-18);
 				isExperiencingIssues = 10;
 				isHavingNoIssues = 0;
 				return;
 			} else if ( cpuUsage > 90f ) { // Major server issues, services are crashing and sites may be down
 				
 				if ( Random.Range(1,100) > 60 ) {
-					modifySatisfaction(-14);
+					ModifySatisfaction(-14);
 					isExperiencingIssues = 12;
 					isHavingNoIssues = 0;
 				}
@@ -91,7 +94,7 @@ public class Customer : MonoBehaviour {
 			} else if ( cpuUsage > 75f ) { // Major server issues, sites may be slow to respond
 
 				if ( Random.Range(1,200) > 155 ) {
-					modifySatisfaction(-9);
+					ModifySatisfaction(-9);
 					isExperiencingIssues = 12;
 					isHavingNoIssues = 0;
 				}
@@ -99,7 +102,7 @@ public class Customer : MonoBehaviour {
 			} else if ( cpuUsage > 62f ) { // Customer is seeing issues but it's intermittent
 
 				if ( Random.Range(1,200) > 175 ) {
-					modifySatisfaction(-4);
+					ModifySatisfaction(-4);
 					// We need to wait some time, otherwise, this will just keep relentlessly lowering the customer
 					// satisfaction
 					isExperiencingIssues = 12;
@@ -107,7 +110,7 @@ public class Customer : MonoBehaviour {
 				}
 				return;
 			} else if ( diskUsage >= 100 ) { // Services can't work when disk usage is full
-				modifySatisfaction(-20);
+				ModifySatisfaction(-20);
 				isExperiencingIssues = 10;
 				isHavingNoIssues = 0;
 				return;
@@ -121,7 +124,7 @@ public class Customer : MonoBehaviour {
 			
 			if ( Random.Range(1,200) > 148 ) {
 				if ( isHavingNoIssues >= 2) {
-					modifySatisfaction(5);
+					ModifySatisfaction(5);
 					isHavingNoIssues = 0;
 				}
 			}
@@ -130,7 +133,51 @@ public class Customer : MonoBehaviour {
 
 	}
 
-	private void modifySatisfaction(int amount) {
+	private void CalculateCancellationIndex() {
+		if ( satisfaction < 20 ) {
+			cancelThreshold += 5;
+		} else if ( satisfaction < 40 ) {
+			cancelThreshold += 2;
+		} else if ( satisfaction < 60 ) {
+			// do nothing
+		} else if ( satisfaction < 80 ) {
+			cancelThreshold -= 2;
+		} else if ( satisfaction <= 100 ) {
+			cancelThreshold -= 5;
+		}
+
+		if ( cancelThreshold > 100 ) {
+			cancelThreshold = 100;
+		} else if ( cancelThreshold < 0 ) {
+			cancelThreshold = 0;
+		}
+	}
+
+	private void CancelDecision() {
+		if ( Random.Range(0, 1000) < cancelThreshold ) {
+			CancelUser();
+		}
+	}
+
+	// The percentage where a user may cancel randomly
+	// at any time simply because they no longer
+	// need the account.
+	private void CheckIfAccountNoLongerNeeded() {
+		int i = Random.Range(0,25000);
+		if ( i > 1490 && i < 1510 ) {
+			CancelUser();
+		}
+	}
+
+	public void CancelUser() {
+		Debug.Log("User " + customerName + " wishes to cancel!"); 
+		// First remove from the server i'm attached to
+		myServer.RemoveCustomer(this);
+		// Then destroy this gameobject
+		Destroy(gameObject);
+	}
+
+	private void ModifySatisfaction(int amount) {
 		satisfaction += amount;
 
 		if ( satisfaction > 100 ) {

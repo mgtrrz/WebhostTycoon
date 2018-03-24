@@ -201,10 +201,14 @@ public class Server : MonoBehaviour {
 		serverCosts = cost;
 	}
 
-	// public void CalculateUpfrontExpenses() {
-		
-	// }
 
+	// Do Not Use to Completely Kick a Customer.
+	// This will remove them from the server, but not
+	// remove the Customer gameObject from the game.
+	// Use Customer.CancelUser();
+	public void RemoveCustomer(Customer customer) {
+		customers.Remove(customer);
+	}
 
 	public bool isFunctional() {
 		/* Server needs a processor and hard drives to function */

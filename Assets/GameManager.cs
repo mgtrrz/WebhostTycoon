@@ -290,6 +290,9 @@ public class GameManager : MonoBehaviour {
 
 			customer.customerName = NameGenerator.generateRandomName(randGend);
 			customer.cxType = CalculateCustomerType();
+			customer.dateJoined = GetCurrentGameDate();
+
+			customer.myServer = serverToUse;
 
 			// Picking a plan at random for now
 			int iRand = Random.Range(0, allPlans.Count);
