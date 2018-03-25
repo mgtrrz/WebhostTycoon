@@ -21,6 +21,11 @@ public class ServerDetails : MonoBehaviour {
 	public Toggle acceptNewCustomers;
 	public Button newDriveButton;
 
+	public Button TerminateServerButton;
+	public Button ViewCustomersButton;
+
+	public GameObject customerServerUI;
+
 	private GameManager gameManager;
 
 	// Use this for initialization
@@ -61,11 +66,11 @@ public class ServerDetails : MonoBehaviour {
 										 GameDate.GetMonthNameFromInt(server.originalBuildDate["Month"]) + " " + server.originalBuildDate["Day"] + " Year: " + server.originalBuildDate["Year"] + "\n" +
 										 "$" + server.originalServerCost;
 
-		serverDetailsRevenueInfo.text = "$" + server.serverIncome + "\n" +
-									    "$" + server.serverCosts + "\n" +
+		serverDetailsRevenueInfo.text = "$" + server.serverIncome + "/mo\n" +
+									    "$" + server.serverCosts + "/mo\n" +
 										"n/a";
 
-		serverProfitTextbox.text = "$" + (server.serverIncome - server.serverCosts);
+		serverProfitTextbox.text = "$" + (server.serverIncome - server.serverCosts) + "/mo";
 
 		if ( server.hardDrives.Count >= server.hardDriveCapacity ) {
 			newDriveButton.interactable = false;
@@ -100,6 +105,15 @@ public class ServerDetails : MonoBehaviour {
 			// We couldn't afford to buy the drive, so provide an error message
 		}
 
+	}
+
+	public void TerminateServer() {
+
+	}
+
+	public void ViewCustomers() {
+		GameObject csUI = Instantiate(customerServerUI, Vector3.zero, Quaternion.identity, GameObject.Find("Canvas").transform);
+		csUI.GetComponent<CustomerServerUI>().server = server;
 	}
 
 	public void CloseServerDetailsWindow() {
