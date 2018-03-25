@@ -165,8 +165,8 @@ public class Customer : MonoBehaviour {
 	// at any time simply because they no longer
 	// need the account.
 	private void CheckIfAccountNoLongerNeeded() {
-		int i = Random.Range(0,25000);
-		if ( i > 1490 && i < 1510 ) {
+		int i = Random.Range(0,75000);
+		if ( i > 7124 && i < 7159 ) {
 			CancelUser();
 		}
 	}

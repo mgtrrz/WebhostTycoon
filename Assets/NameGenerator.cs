@@ -113,14 +113,14 @@ public class NameGenerator {
 	}
 
 	public static string hostnameGenerator() {
-		return adjectives[Random.Range(0, adjectives.Length+1)] + "-" + nouns[Random.Range(0, nouns.Length+1)];
+		return adjectives[Random.Range(0, adjectives.Length)] + "-" + nouns[Random.Range(0, nouns.Length)];
 	}
 
 	public static string randomAdjective() {
-		return adjectives[Random.Range(0, adjectives.Length+1)];
+		return adjectives[Random.Range(0, adjectives.Length)];
 	}
 
 	public static string randomNoun() {
-		return nouns[Random.Range(0, nouns.Length+1)];
+		return nouns[Random.Range(0, nouns.Length)];
 	}
 }
