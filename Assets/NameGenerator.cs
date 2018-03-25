@@ -49,7 +49,7 @@ public class NameGenerator {
 		"able", "absolute", "accomplished", "acclaimed", "adventurous", "admirable", "afraid", "adored", "aggressive", "agile", "alarmed", "amazing", "angelic",
 		"ancient", "anxious", "artistic", "athletic", "awkward", "awesome", "authentic", "attractive",
 		"babyish", "barren", "basic", "beloved", "best", "bitter", "blank", "blissful", "blushing", "bogus", "bold", "bouncy", "brave", "brilliant", "bubbly",
-		"bustling", "buttery",
+		"bustling", "buttery", "buff",
 		"calculating", "calm", "cautious", "careful", "caring", "cheap", "cheery", "cheerful", "clever", "cloudy", "colorful", "colorless", "comfortable", "common",
 		"complex", "complicated", "considerate", "conventional", "corny", "courageous", "corrupt", "creamy", "creepy", "cultured", "critical", "cuddly", "curvy", 
 		"cute", "cruel",
@@ -96,7 +96,16 @@ public class NameGenerator {
 		"portals", "synergies", "schemas", "solutions", "technologies", "computers", "switches", "routers", "ajax", "cloud", "space", "speed", "revolvers", "ideas", "systems",
 		"data", "backups", "partnerships", "users", "art", "music", "food", "theory", "problem", "software", "internet", "cables", "media", "security", "keyboards", "laptops", 
 		"floorboards", "profits", "clocks", "cooling", "customers", "managers", "books", "shield", "firewall", "containers", "machines", "humans", "robots", "cameras", "cells",
-		"pdfs", "docs", "phone", "magazine", "category", "database", "inflation", "advice", "business", "game", "economy"
+		"pdfs", "docs", "phone", "magazine", "category", "database", "inflation", "advice", "business", "game", "economy", "unicorns", "cookies", "javascript", "php", "wordpress",
+		"cat", "dog", "horse", 
+	};
+
+	public static string[] tlds = {
+		".com", ".org", ".net", ".edu", ".gov", ".co", ".io", ".me", ".us", ".biz", ".ca", ".ru", ".uk", ".es", ".xxx", ".site", ".website", ".shop", ".party", ".store",
+		".ninja", ".lol", ".host", ".cloud", ".live", ".world", ".bid", ".global", ".blog", ".moe", ".art", ".cn", ".media", ".men", ".travel", ".review", ".family", 
+		".studio", ".nyc", ".wtf", ".cat", ".guru", ".love", ".solutions", ".webcam", ".no", ".pe", ".af", ".fun", ".do", ".social", ".digital", ".chat", ".sexy", ".dog",
+		".jp", ".sex", ".wedding", ".aaa", ".market", ".audio", ".photo", ".expert", ".gold", ".pizza", ".help", ".cash", ".game", ".sucks", ".software", ".business", 
+		".games", ".cafe", ".systems", ".company", ".video", ".loan", ".movie", ".money", ".church", ".cool", ".technology", ".security", ".coffee", ".energy", ".beer", ".bi"
 	};
 
 	public static string generateRandomName(string gender) {
