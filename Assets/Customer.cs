@@ -15,6 +15,8 @@ public class Customer : MonoBehaviour {
 	public float diskUsage;
 	public int sites;
 
+	public float wattCost;
+
 
 	public Dictionary<string, int> dateJoined;
 

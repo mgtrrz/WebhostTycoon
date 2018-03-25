@@ -49,6 +49,9 @@ public class Server : MonoBehaviour {
 	public int serverCosts; // Amount of money it costs to run this server
 	public int serverCustomerSatisfaction; // How happy customers are of server performance on average
 
+	public float powerUsage; // Wattage 
+	public int powerCost; // Cost ^
+
 	public int originalServerCost;
 	public Dictionary<string, int> originalBuildDate; // "Month" = 1, "Day" = 1, "Year" = 1
 	public List<float> cpuUsageOverTime;
@@ -132,6 +135,7 @@ public class Server : MonoBehaviour {
 		// Resources
 		CalculateCpuUsage();
 		CalculateDiskUsage();
+		CalculatePowerUsage();
 
 		// Money
 		CalculateRevenue();
@@ -199,6 +203,18 @@ public class Server : MonoBehaviour {
 		// Costs to run the server, like software licenses or electricity costs
 		int cost = software.cost;
 		serverCosts = cost;
+	}
+
+	private void CalculatePowerUsage() {
+		// CPUs have a minimum watt and maximum watt
+		// When CPU usage is at 0%, use minimum watt. If at 100% use maximum
+		// value = ( percent * (max-min) / 100) + min
+		powerUsage = ( cpuUsage * (processor.maxWattage - processor.minWattage) / 100 ) + processor.minWattage;
+
+		// It'll be interesting to see how this would work but it may be too complicated for users.
+		// If we went forward, we'd have to keep a list of usage over time and either pay for electric
+		// at the end of the month or each day
+		// powerCost = powerUsage
 	}
 
 
