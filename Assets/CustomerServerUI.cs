@@ -5,6 +5,7 @@ using UnityEngine;
 public class CustomerServerUI : MonoBehaviour {
 
 	public CustomerItem customerItem;
+	public GameObject customerItemHeader;
 	public Server server;
 	public GameObject viewportContent;
 
@@ -24,6 +25,7 @@ public class CustomerServerUI : MonoBehaviour {
 			Destroy(child.gameObject);
 		}
 
+		Instantiate(customerItemHeader, Vector3.zero, Quaternion.identity, viewportContent.transform);
 		// populating with customers
 		foreach ( Customer customer in server.customers ) {
 			CustomerItem ci = Instantiate(customerItem, Vector3.zero, Quaternion.identity, viewportContent.transform);
