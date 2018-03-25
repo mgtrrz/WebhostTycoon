@@ -7,6 +7,7 @@ public class Customer : MonoBehaviour {
 
 	public string customerName;
 	public int age;
+	public string primarySite;
 	public Plan plan;
 
 	public float cpuUsage;

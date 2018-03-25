@@ -11,6 +11,7 @@ public class CustomerItem : MonoBehaviour {
 	public Button infoButton;
 
 	public Customer customer;
+	public GameObject customerDetailsUI;
 
 	// Use this for initialization
 	void Start () {
@@ -28,5 +29,10 @@ public class CustomerItem : MonoBehaviour {
 			cpuTextbox.text = customer.cpuUsage.ToString("0.#\\%");
 			diskTextbox.text = customer.diskUsage.ToString("0.#\\GB");
 		}
+	}
+
+	public void OpenCustomerDetailsUI() {
+		GameObject detailsUI = Instantiate(customerDetailsUI, Vector3.zero, Quaternion.identity, GameObject.Find("Canvas").transform);
+		detailsUI.GetComponent<CustomerDetailsUI>().customer = customer;
 	}
 }

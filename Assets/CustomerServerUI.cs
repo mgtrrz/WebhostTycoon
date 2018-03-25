@@ -36,4 +36,5 @@ public class CustomerServerUI : MonoBehaviour {
 	public void CloseWindow() {
 		Destroy(gameObject);
 	}
+
 }
