@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour {
 	public Text totalServersTextbox;
 	public Text popularityTextbox;
 	public Text satisfactionTextbox;
+	public GameObject dialogueBox;
 
 	/* ---------------- */
 	/*  Game Variables  */
@@ -320,5 +321,10 @@ public class GameManager : MonoBehaviour {
 		} else {
 			return allCustomerTypes[3];
 		}
+	}
+
+	public void ShowDialogueBox(string message, string header) {
+		GameObject dialogue = Instantiate(dialogueBox, Vector3.zero, Quaternion.identity, GameObject.Find("Canvas").transform);
+		dialogue.GetComponent<MessageDialog>().SetMessage(message, header);
 	}
 }

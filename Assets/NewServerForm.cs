@@ -136,6 +136,7 @@ public class NewServerForm : MonoBehaviour {
 	public void PurchaseServer() {
 		// If we can't afford this server, back out. Also give a warning/error message
 		if ( !gameManager.MakePurchase(UpfrontCost) ) {
+			gameManager.ShowDialogueBox("You do not have enough money to make this purchase!", "Error");
 			return;
 		}
 
