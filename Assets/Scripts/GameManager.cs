@@ -107,14 +107,16 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	void Update () {
+		
+	}
 
+	void FixedUpdate() {
 		if ( counter <= 0 ) {
 			TickClock();
 			counter = timeInterval;
 		}
 
 		counter -= Time.fixedDeltaTime;
-		
 	}
 
 	public void TickClock() {

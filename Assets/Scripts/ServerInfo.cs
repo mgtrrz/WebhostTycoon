@@ -11,12 +11,14 @@ public class ServerInfo : MonoBehaviour {
 	public Text customers;
 	public Text profit;
 	public Text accepting;
+	public Image bg;
 
 	public Server server;
 
 	public GameObject editServerUI;
 	// Use this for initialization
 	void Start () {
+		bg.canvasRenderer.SetAlpha( 0.0f );
 	}
 	
 	// Update is called once per frame
@@ -37,6 +39,12 @@ public class ServerInfo : MonoBehaviour {
 			accepting.text = "Accepting: Yes";
 		} else {
 			accepting.text = "Accepting: No";
+		}
+
+		if ( server.cpuUsage > 60 ) {
+			bg.CrossFadeAlpha(1f, .2f, false);
+		} else {
+			bg.CrossFadeAlpha(0f, .2f, false);
 		}
 	}
 
