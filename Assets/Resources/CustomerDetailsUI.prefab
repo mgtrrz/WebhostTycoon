@@ -930,6 +930,8 @@ MonoBehaviour:
   customerDetailsRightTextbox: {fileID: 114859617532072974}
   salesOpButton: {fileID: 114418605788400086}
   kickButton: {fileID: 114516023319408850}
+  kickCustomerDialog: {fileID: 1631230638388326, guid: 5dd64deaee53e264bafdb8aaf15f3355,
+    type: 2}
   customer: {fileID: 0}
 --- !u!114 &114803688348618146
 MonoBehaviour:

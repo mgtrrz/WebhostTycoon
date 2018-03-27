@@ -10,6 +10,8 @@ public class CustomerDetailsUI : MonoBehaviour {
 	public Button salesOpButton;
 	public Button kickButton;
 
+	public GameObject kickCustomerDialog;
+
 	public Customer customer;
 
 	// Use this for initialization
@@ -49,6 +51,8 @@ public class CustomerDetailsUI : MonoBehaviour {
 	}
 
 	public void KickCustomer() {
-
+		GameObject kickCustomerUI = Instantiate(kickCustomerDialog, Vector3.zero, Quaternion.identity, GameObject.Find("Canvas").transform);
+		kickCustomerUI.GetComponent<KickCustomerDialog>().customer = customer;
+		kickCustomerUI.GetComponent<KickCustomerDialog>().customerDetailsWindow = gameObject;
 	}
 }

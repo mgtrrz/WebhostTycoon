@@ -13,8 +13,22 @@ public class SpeedController : MonoBehaviour {
 	public Color32 pauseColor;
 	public Color32 speedColor;
 
+	public float fastSpeedTimeScale;
+	public float fastestSpeedTimeScale;
+
 	// Use this for initialization
 	void Start () {
+		ResetButtonColors();
+
+		if ( Time.timeScale == 0f ) {
+			pause.GetComponent<Image>().color = pauseColor;
+		} else if ( Time.timeScale == 1f ) {
+			normal.GetComponent<Image>().color = speedColor;
+		} else if ( Time.timeScale == fastSpeedTimeScale ) {
+			fast.GetComponent<Image>().color = speedColor;
+		} else if ( Time.timeScale == fastestSpeedTimeScale ) {
+			fastest.GetComponent<Image>().color = speedColor;
+		}
 		
 	}
 	
@@ -49,12 +63,12 @@ public class SpeedController : MonoBehaviour {
 	public void FastSpeed() {
 		ResetButtonColors();
 		fast.GetComponent<Image>().color = speedColor;
-		Time.timeScale = 3f;
+		Time.timeScale = fastSpeedTimeScale;
 	}
 
 	public void FastestSpeed() {
 		ResetButtonColors();
 		fastest.GetComponent<Image>().color = speedColor;
-		Time.timeScale = 6f;
+		Time.timeScale = fastestSpeedTimeScale;
 	}
 }
