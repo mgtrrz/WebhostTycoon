@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour {
 	public string companyTld; // .com, .org, .net, etc.
 	public string difficulty;
 	public bool acceptingCustomers;
+	public ServerEnvironment environment;
 
 	/* ------------------ */
 	/* Player Performance */
@@ -83,6 +84,9 @@ public class GameManager : MonoBehaviour {
 	private CustomerParent customerParent;
 	private ServerParent serverParent;
 
+	public enum ServerEnvironment {
+		Home, Provider, Datacenter, Cloud
+	}
 
 	void Start () {
 		customerParent = FindObjectOfType<CustomerParent>();
