@@ -26,11 +26,11 @@ public class ServerDetails : MonoBehaviour {
 
 	public GameObject customerServerUI;
 
-	private GameManager gameManager;
+	//private GameManager.gameManager GameManager.gameManager;
 
 	// Use this for initialization
 	void Start () {
-		gameManager = FindObjectOfType<GameManager>();
+		//GameManager.gameManager = FindObjectOfType<GameManager.gameManager>();
 	}
 	
 	// Update is called once per frame
@@ -99,7 +99,7 @@ public class ServerDetails : MonoBehaviour {
 	public void AddStorageDrive() {
 		StorageDrive drive = server.hardDrives[0];
 
-		if ( gameManager.MakePurchase(drive.cost) ) {
+		if ( GameManager.gameManager.MakePurchase(drive.cost) ) {
 			server.hardDrives.Add(drive);
 		} else {
 			// We couldn't afford to buy the drive, so provide an error message

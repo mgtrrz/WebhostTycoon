@@ -62,10 +62,10 @@ public class Server : MonoBehaviour {
 	private int cpuLogTimer;
 	private int diskLogTimer;
 
-	private GameManager gameManager;
+	//private GameManager.gameManager GameManager.gameManager;
 
 	void Start() {
-		gameManager = FindObjectOfType<GameManager>();
+		//GameManager.gameManager = FindObjectOfType<GameManager.gameManager>();
 	}
 
 
@@ -161,7 +161,7 @@ public class Server : MonoBehaviour {
 	public void ServerMonthlyTick() {
 		// Debug.Log("Server: " + hostname + " got MONTHLY ServerTick broadcast!");
 		// Calculating our monthly revenue and expenses
-		gameManager.MakeProfit( serverIncome - serverCosts );
+		GameManager.gameManager.MakeProfit( serverIncome - serverCosts );
 	}
 
 
@@ -175,20 +175,20 @@ public class Server : MonoBehaviour {
 
 		if ( cpuLogTimer == 0 ) {
 			if ( cpuUsage >= 60 ) {
-				gameManager.AddLogEntry(hostname + " CPU usage is over 60%! Customer sites may be slow or unresponsive.");
+				GameManager.gameManager.AddLogEntry(hostname + " CPU usage is over 60%! Customer sites may be slow or unresponsive.");
 				cpuLogTimer = 24;
 			} else if ( cpuUsage >= 100 ) {
-				gameManager.AddLogEntry(hostname + " CPU usage is over 100%! Services are failing. Customer sites are down.");
+				GameManager.gameManager.AddLogEntry(hostname + " CPU usage is over 100%! Services are failing. Customer sites are down.");
 				cpuLogTimer = 6;
 			}
 		}
 
 		if ( diskLogTimer == 0 ) {
 			if ( CalculateDiskPercentage() >= 80 ) {
-				gameManager.AddLogEntry(hostname + " disk usage is nearing 100%. Optimize customer accounts or add new hard drives.");
+				GameManager.gameManager.AddLogEntry(hostname + " disk usage is nearing 100%. Optimize customer accounts or add new hard drives.");
 				diskLogTimer = 24;
 			} else if ( CalculateDiskPercentage() >= 80 ) {
-				gameManager.AddLogEntry(hostname + " disk usage is at 100%! Services are unable to operate reliably. Customer sites are down.");
+				GameManager.gameManager.AddLogEntry(hostname + " disk usage is at 100%! Services are unable to operate reliably. Customer sites are down.");
 				diskLogTimer = 6;
 			}
 		}

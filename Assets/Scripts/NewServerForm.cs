@@ -19,7 +19,7 @@ public class NewServerForm : MonoBehaviour {
 	private GameObject serverParent;
 
 
-	private GameManager gameManager;
+	//private GameManager.gameManager GameManager.gameManager;
 
 	//List<string> serverTypes = new List<string>() {"Desktop", "Workstation", "Server1U", "Server2U", "Storage4U"};
 	List<string> serverTypes = new List<string>();
@@ -31,21 +31,21 @@ public class NewServerForm : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		serverParent = GameObject.Find("Servers");
-		gameManager = FindObjectOfType<GameManager>();
+		//GameManager.gameManager = FindObjectOfType<GameManager.gameManager>();
 		
-		foreach ( ServerChassis sc in gameManager.allServerChassis) {
+		foreach ( ServerChassis sc in GameManager.gameManager.allServerChassis) {
 			serverTypes.Add(sc.name + " ($" + sc.cost + ")");
 		}
 		
-		foreach ( CPU cpu in gameManager.allCpus ) {
+		foreach ( CPU cpu in GameManager.gameManager.allCpus ) {
 			cpuTypes.Add(cpu.name + " ($" + cpu.cost + ")");
 		}
 
-		foreach ( StorageDrive hd in gameManager.allStorageDrives ) {
+		foreach ( StorageDrive hd in GameManager.gameManager.allStorageDrives ) {
 			hardDriveTypes.Add(hd.name + " ($" + hd.cost + ")");
 		}
 
-		foreach ( Software sw in gameManager.allSoftware ) {
+		foreach ( Software sw in GameManager.gameManager.allSoftware ) {
 			software.Add(sw.name + " ($" + sw.cost + "/mo)");
 		}
 
@@ -75,7 +75,7 @@ public class NewServerForm : MonoBehaviour {
 		// Clear the list
 		hardDriveCapacityTypes.Clear();
 
-		for(int i=1; i <= gameManager.allServerChassis[serverTypeDropdown.value].hardDriveCapacity; i++) {
+		for(int i=1; i <= GameManager.gameManager.allServerChassis[serverTypeDropdown.value].hardDriveCapacity; i++) {
 			hardDriveCapacityTypes.Add("x" + i);
 		}
 		hardDriveCapacityDropdown.ClearOptions();
@@ -94,14 +94,14 @@ public class NewServerForm : MonoBehaviour {
 	}
 
 	void UpdateServerInformationDisplay() {
-		var cores = gameManager.allCpus[cpuDropdown.value].cores;
+		var cores = GameManager.gameManager.allCpus[cpuDropdown.value].cores;
 		var logicalCores = cores;
-		if ( gameManager.allCpus[cpuDropdown.value].hyperthreaded ) {
+		if ( GameManager.gameManager.allCpus[cpuDropdown.value].hyperthreaded ) {
 			logicalCores = cores * 2;
 		}
 		serverInfoDisplay.text = cpuTypes[cpuDropdown.value] + "\n" 
 							   + cores + "/" + logicalCores + "\n" 
-							   + gameManager.allServerChassis[serverTypeDropdown.value].hardDriveCapacity;
+							   + GameManager.gameManager.allServerChassis[serverTypeDropdown.value].hardDriveCapacity;
 	}
 
 	void UpdateServerCostDisplay() {
@@ -115,10 +115,10 @@ public class NewServerForm : MonoBehaviour {
 		get { 
 			int cost = 0;
 
-			cost += gameManager.allCpus[cpuDropdown.value].cost;
-			cost += gameManager.allServerChassis[serverTypeDropdown.value].cost;
-			cost += gameManager.allStorageDrives[hardDriveDropdown.value].cost * ( hardDriveCapacityDropdown.value + 1 );
-			cost += gameManager.allSoftware[softwareDropdown.value].cost;
+			cost += GameManager.gameManager.allCpus[cpuDropdown.value].cost;
+			cost += GameManager.gameManager.allServerChassis[serverTypeDropdown.value].cost;
+			cost += GameManager.gameManager.allStorageDrives[hardDriveDropdown.value].cost * ( hardDriveCapacityDropdown.value + 1 );
+			cost += GameManager.gameManager.allSoftware[softwareDropdown.value].cost;
 
 			return cost;
 		}
@@ -127,7 +127,7 @@ public class NewServerForm : MonoBehaviour {
 	public int MonthlyRentalCost {
 		get { 
 			int cost = 0;
-			cost += gameManager.allSoftware[softwareDropdown.value].cost;
+			cost += GameManager.gameManager.allSoftware[softwareDropdown.value].cost;
 
 			return cost;
 		}
@@ -135,8 +135,8 @@ public class NewServerForm : MonoBehaviour {
 
 	public void PurchaseServer() {
 		// If we can't afford this server, back out. Also give a warning/error message
-		if ( !gameManager.MakePurchase(UpfrontCost) ) {
-			gameManager.ShowDialogueBox("You do not have enough money to make this purchase!", "Error");
+		if ( !GameManager.gameManager.MakePurchase(UpfrontCost) ) {
+			GameManager.gameManager.ShowDialogueBox("You do not have enough money to make this purchase!", "Error");
 			return;
 		}
 
@@ -146,21 +146,21 @@ public class NewServerForm : MonoBehaviour {
 		var serverComponent = newServer.GetComponent<Server>();
 
 		serverComponent.hostname = hostname.text;
-		serverComponent.serverChassis = gameManager.allServerChassis[serverTypeDropdown.value];
-		serverComponent.processor = gameManager.allCpus[cpuDropdown.value];
-		serverComponent.software = gameManager.allSoftware[softwareDropdown.value];
+		serverComponent.serverChassis = GameManager.gameManager.allServerChassis[serverTypeDropdown.value];
+		serverComponent.processor = GameManager.gameManager.allCpus[cpuDropdown.value];
+		serverComponent.software = GameManager.gameManager.allSoftware[softwareDropdown.value];
 
 		serverComponent.originalServerCost = UpfrontCost;
-		serverComponent.originalBuildDate = gameManager.GetCurrentGameDate();
+		serverComponent.originalBuildDate = GameManager.gameManager.GetCurrentGameDate();
 
 		serverComponent.acceptCustomers = true;
 
 		for(int i = 1; i <= (hardDriveCapacityDropdown.value + 1); i++) {
-			serverComponent.hardDrives.Add(gameManager.allStorageDrives[hardDriveDropdown.value]);
+			serverComponent.hardDrives.Add(GameManager.gameManager.allStorageDrives[hardDriveDropdown.value]);
 		}
 
-		// Adding it to our GameManager (Or is this necessary?)
-		gameManager.servers.Add(serverComponent);
+		// Adding it to our GameManager.gameManager (Or is this necessary?)
+		GameManager.gameManager.servers.Add(serverComponent);
 		CloseForm();
 
 		ServerInfoUI sui = FindObjectOfType<ServerInfoUI>();

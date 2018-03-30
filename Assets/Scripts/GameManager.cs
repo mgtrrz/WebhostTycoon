@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour {
 
 	const string GameMode = "DEV";
 
+	public static GameManager gameManager;
+
 	/* ---------------- */
 	/*       Clock      */
 	/* ---------------- */
@@ -90,7 +92,19 @@ public class GameManager : MonoBehaviour {
 		Home, Provider, Datacenter, Cloud
 	}
 
+	void Awake() {
+		// Singleton
+		if (gameManager == null) {
+			// Keep this persistent across all scenes
+			DontDestroyOnLoad(gameObject);
+			gameManager = this;
+		} else if (gameManager != this) {
+			Destroy(gameObject);
+		}
+	}
 	void Start () {
+		// Keep this persistent across all scenes
+
 		customerParent = FindObjectOfType<CustomerParent>();
 		serverParent = FindObjectOfType<ServerParent>();
 		/* Initializing our Clock */

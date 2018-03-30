@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class ServerInfoUI : MonoBehaviour {
 
 	public GameObject serverInfo;
-	private GameManager gameManager;
+	//private GameManager.gameManager GameManager.gameManager;
 
 	// Use this for initialization
 	void Start () {
-		gameManager = FindObjectOfType<GameManager>();
+		//GameManager.gameManager = FindObjectOfType<GameManager.gameManager>();
 
 	}
 	
@@ -21,13 +21,13 @@ public class ServerInfoUI : MonoBehaviour {
 	}
 
 	public void UpdateServerInfoDisplay() {
-		if ( gameManager.servers != null ) {
+		if ( GameManager.gameManager.servers != null ) {
 			// Let's clear out the previous entries by deleting the child gameobjects
 			foreach (Transform child in transform) {
 				Destroy(child.gameObject);
 			}
 
-			foreach (Server server in gameManager.servers) {
+			foreach (Server server in GameManager.gameManager.servers) {
 				// Instantiating our UI child box thing
 				GameObject si = Instantiate(serverInfo, Vector3.zero, Quaternion.identity, gameObject.transform);
 				ServerInfo serverDetails = si.GetComponent<ServerInfo>();

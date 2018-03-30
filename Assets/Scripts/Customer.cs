@@ -37,13 +37,13 @@ public class Customer : MonoBehaviour {
 
 	public CustomerType cxType;
 
-	private GameManager gameManager;
+	//private GameManager gameManager;
 
 	public Server myServer;
 
 	// Use this for initialization
 	void Start () {
-		gameManager = FindObjectOfType<GameManager>();
+		//gameManager = FindObjectOfType<GameManager>();
 		CalculateDiskUsage();
 	}
 	
@@ -174,7 +174,7 @@ public class Customer : MonoBehaviour {
 
 	public void CancelUser() {
 		//Debug.Log("User " + customerName + " wishes to cancel!"); 
-		gameManager.AddLogEntry(customerName + " cancelled their account");
+		GameManager.gameManager.AddLogEntry(customerName + " cancelled their account");
 		// First remove from the server i'm attached to
 		myServer.RemoveCustomer(this);
 		// Then destroy this gameobject
