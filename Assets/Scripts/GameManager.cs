@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 public class GameManager : MonoBehaviour {
 
@@ -251,7 +253,7 @@ public class GameManager : MonoBehaviour {
 	public void CalculateCustomerTraction() {
 
 		// Determining if we get a customer in this tick
-		if ( Random.Range(0, 9000) > 8710 ) {
+		if ( UnityEngine.Random.Range(0, 9000) > 8710 ) {
 			AddCustomer();
 		}
 	}
@@ -314,9 +316,9 @@ public class GameManager : MonoBehaviour {
 
 			string[] gender = new string[] {"male", "female"};
 
-			string randGend = gender[Random.Range(0,2)];
+			string randGend = gender[UnityEngine.Random.Range(0,2)];
 
-			customer.age = Random.Range(18, 115);
+			customer.age = UnityEngine.Random.Range(18, 115);
 
 			customer.customerName = NameGenerator.generateRandomName(randGend);
 			customer.cxType = CalculateCustomerType();
@@ -324,8 +326,8 @@ public class GameManager : MonoBehaviour {
 
 			customer.myServer = serverToUse;
 
-			// Picking a plan at random for now
-			int iRand = Random.Range(0, allPlans.Count);
+			// Picking a plan at UnityEngine.Random for now
+			int iRand = UnityEngine.Random.Range(0, allPlans.Count);
 			customer.plan = allPlans[iRand];
 
 			serverToUse.customers.Add(customer);
@@ -340,7 +342,7 @@ public class GameManager : MonoBehaviour {
 			customerTypes.Add(new KeyValuePair<float, CustomerType>(cType.commonPercentage, cType));
 		}
 		*/
-		int randInt = Random.Range(1,100);
+		int randInt = UnityEngine.Random.Range(1,100);
 		if ( randInt < 84 ) {
 			return allCustomerTypes[0];
 		} else if ( randInt < 92 ) {
@@ -356,4 +358,33 @@ public class GameManager : MonoBehaviour {
 		GameObject dialogue = Instantiate(dialogueBox, Vector3.zero, Quaternion.identity, GameObject.Find("Canvas").transform);
 		dialogue.GetComponent<MessageDialog>().SetMessage(message, header);
 	}
+
+	public void SaveGame() {
+		var bf = new BinaryFormatter();
+		var file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
+
+		var playerData = new PlayerData();
+		playerData.health = 50;
+		playerData.experience = 1500;
+		bf.Serialize(file, playerData);
+		file.Close();
+	}
+
+	public void LoadGame() {
+		if ( File.Exists(Application.persistentDataPath + "/playerInfo.dat") ) {
+			var bf = new BinaryFormatter();
+			var file = File.Open(Application.persistentDataPath + "/playerInfo.data", FileMode.Open);
+			PlayerData playerData = (PlayerData)bf.Deserialize(file);
+			file.Close();
+
+			// Then you can take playerData and load them into the gameManager instance
+			// whatever = playerData.whatever
+		}
+	}
+}
+
+[Serializable]
+class PlayerData {
+	public float health;
+	public float experience;
 }
