@@ -173,7 +173,8 @@ public class Customer : MonoBehaviour {
 	}
 
 	public void CancelUser() {
-		Debug.Log("User " + customerName + " wishes to cancel!"); 
+		//Debug.Log("User " + customerName + " wishes to cancel!"); 
+		gameManager.AddLogEntry(customerName + " cancelled their account");
 		// First remove from the server i'm attached to
 		myServer.RemoveCustomer(this);
 		// Then destroy this gameobject

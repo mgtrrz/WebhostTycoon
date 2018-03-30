@@ -74,6 +74,8 @@ public class GameManager : MonoBehaviour {
 	public Text satisfactionTextbox;
 	public GameObject dialogueBox;
 
+	public Text logTextbox;
+
 	/* ---------------- */
 	/*  Game Variables  */
 	/* ---------------- */
@@ -181,6 +183,13 @@ public class GameManager : MonoBehaviour {
 	}
 
 
+	public void AddLogEntry(string message) {
+		if ( logTextbox.cachedTextGenerator.lineCount > 8 ) {
+			logTextbox.text = logTextbox.text.Substring(logTextbox.text.IndexOf('\n') + 1);
+		}
+
+		logTextbox.text += message + "\n";
+	}
 
 	public void Tick() {
 
@@ -306,7 +315,7 @@ public class GameManager : MonoBehaviour {
 			customer.plan = allPlans[iRand];
 
 			serverToUse.customers.Add(customer);
-
+			AddLogEntry(customer.customerName + " created an account!");
 		}
 	}
 	

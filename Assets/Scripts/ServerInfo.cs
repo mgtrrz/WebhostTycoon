@@ -15,10 +15,11 @@ public class ServerInfo : MonoBehaviour {
 
 	public Server server;
 
+
 	public GameObject editServerUI;
 	// Use this for initialization
 	void Start () {
-		bg.canvasRenderer.SetAlpha( 0.0f );
+		bg.canvasRenderer.SetAlpha( 1f );
 	}
 	
 	// Update is called once per frame
@@ -41,10 +42,11 @@ public class ServerInfo : MonoBehaviour {
 			accepting.text = "Accepting: No";
 		}
 
-		if ( server.cpuUsage > 60 ) {
-			bg.CrossFadeAlpha(1f, .2f, false);
+		if ( server.cpuUsage >= 60 || server.CalculateDiskPercentage() >= 80 ) {
+			// print( server.hostname + " server load is above 60%!");
+			bg.GetComponent<Image>().CrossFadeAlpha(1f, .2f, false);
 		} else {
-			bg.CrossFadeAlpha(0f, .2f, false);
+			bg.GetComponent<Image>().CrossFadeAlpha(0f, .2f, false);
 		}
 	}
 

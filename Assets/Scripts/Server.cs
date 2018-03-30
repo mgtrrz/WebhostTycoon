@@ -57,7 +57,10 @@ public class Server : MonoBehaviour {
 	public List<float> cpuUsageOverTime;
 
 	public bool active; // Whether this server is turned "on" or "off"
+	
 
+	private int cpuLogTimer;
+	private int diskLogTimer;
 
 	private GameManager gameManager;
 
@@ -143,7 +146,16 @@ public class Server : MonoBehaviour {
 
 		CalculateCustomerSatisfaction();
 
-		BroadcastServerPerformance();
+		BroadcastServerPerformance(); // For sending server usage to customers
+		LogServerPerformance(); // For notifying the player about server performance
+
+		if ( cpuLogTimer > 0 ) {
+			cpuLogTimer -= 1;
+		}
+
+		if ( diskLogTimer > 0 ) {
+			diskLogTimer -= 1;
+		}
 	}
 
 	public void ServerMonthlyTick() {
@@ -159,6 +171,28 @@ public class Server : MonoBehaviour {
 		}
 	}
 
+	private void LogServerPerformance() {
+
+		if ( cpuLogTimer == 0 ) {
+			if ( cpuUsage >= 60 ) {
+				gameManager.AddLogEntry(hostname + " CPU usage is over 60%! Customer sites may be slow or unresponsive.");
+				cpuLogTimer = 24;
+			} else if ( cpuUsage >= 100 ) {
+				gameManager.AddLogEntry(hostname + " CPU usage is over 100%! Services are failing. Customer sites are down.");
+				cpuLogTimer = 6;
+			}
+		}
+
+		if ( diskLogTimer == 0 ) {
+			if ( CalculateDiskPercentage() >= 80 ) {
+				gameManager.AddLogEntry(hostname + " disk usage is nearing 100%. Optimize customer accounts or add new hard drives.");
+				diskLogTimer = 24;
+			} else if ( CalculateDiskPercentage() >= 80 ) {
+				gameManager.AddLogEntry(hostname + " disk usage is at 100%! Services are unable to operate reliably. Customer sites are down.");
+				diskLogTimer = 6;
+			}
+		}
+	}
 
 	private void CalculateCustomerSatisfaction() {
 		if ( customers.Count == 0 ) {
