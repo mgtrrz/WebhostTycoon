@@ -5762,7 +5762,7 @@ Prefab:
     - target: {fileID: 224121595365855830, guid: 982438091b660e242a02a9e924c168f0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224121595365855830, guid: 982438091b660e242a02a9e924c168f0,
         type: 2}
@@ -8736,10 +8736,10 @@ RectTransform:
   m_Father: {fileID: 55325680}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 569, y: -0.27498}
-  m_SizeDelta: {x: 346.9, y: 817}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -217, y: -0.27496338}
+  m_SizeDelta: {x: 346.90002, y: -67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1682656746 stripped
 RectTransform:
@@ -10760,6 +10760,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da49fe711073d3f4b97fde888545bbc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fullName: Marcus Gutierrez
+  age: 28
+  happiness: 2
+  performance: 2
+  productivity: 2
+  skill: 0
+  burnOut: 98
+  compensation: 2
+  team: 0
+  location: 0
 --- !u!1001 &2080266930
 Prefab:
   m_ObjectHideFlags: 0

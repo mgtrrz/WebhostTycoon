@@ -161,7 +161,7 @@ public class Server : MonoBehaviour {
 	public void ServerMonthlyTick() {
 		// Debug.Log("Server: " + hostname + " got MONTHLY ServerTick broadcast!");
 		// Calculating our monthly revenue and expenses
-		GameManager.gameManager.MakeProfit( serverIncome - serverCosts );
+		GameManager.gameManager.MakeProfit( serverCosts );
 	}
 
 
@@ -227,10 +227,12 @@ public class Server : MonoBehaviour {
 
 	public void CalculateRevenue() {
 		// Money coming into the server from customers
+		
 		serverIncome = 0;
 		foreach (Customer cx in customers) {
 			serverIncome += cx.plan.cost;
 		}
+		
 	}
 
 	public void CalculateMonthlyExpenses() {

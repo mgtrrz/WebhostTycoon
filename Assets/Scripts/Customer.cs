@@ -6,6 +6,7 @@ using UnityEngine;
 public class Customer : MonoBehaviour {
 
 	public string customerName;
+	public int customerID;
 	public int age;
 	public string primarySite;
 	public Plan plan;
@@ -29,6 +30,7 @@ public class Customer : MonoBehaviour {
 
 
 	private int tickTimer;
+	private int monthlyChargeTimer;
 
 	private int isExperiencingIssues;
 	private int isHavingNoIssues;
@@ -45,6 +47,10 @@ public class Customer : MonoBehaviour {
 	void Start () {
 		//gameManager = FindObjectOfType<GameManager>();
 		CalculateDiskUsage();
+
+		// We just got instantiated, so let's charge the monthly cost
+		ChargePlanCostMonthly();
+		// But we need to watch out here, to make sure that we don't accidentally double charge
 	}
 	
 	// Update is called once per frame
@@ -58,20 +64,39 @@ public class Customer : MonoBehaviour {
 		CalculateDiskUsage();
 
 		if ( isExperiencingIssues > 0 ) {
-			isExperiencingIssues -= 1;
+			isExperiencingIssues--;
 		}
 
 		CancelDecision();
 		CheckIfAccountNoLongerNeeded();
+
+		if ( monthlyChargeTimer > 0 ) {
+			monthlyChargeTimer--;
+		}
 	}
 
 	public void CustomerDailyTick() {
 		isHavingNoIssues++;
 		CalculateCancellationIndex();
+		ChargePlanCostMonthly();
+		// 
 	}
 
 	public void CustomerMonthlyTick() {
-		
+		// This happens once every month, but at the start of the month
+	}
+
+	private void ChargePlanCostMonthly() {
+		// Charge this customer's credit card every month after their acquisition
+		/*
+		if ( GameManager.gameManager.currentDay == dateJoined["Day"] && monthlyChargeTimer == 0 ) {
+			GameManager.gameManager.MakeProfit(plan.cost);
+			monthlyChargeTimer = 25;
+		}
+		*/
+		if ( GameManager.gameManager.currentDay == dateJoined["Day"] ) {
+			GameManager.gameManager.MakeProfit(plan.cost);
+		}
 	}
 
 

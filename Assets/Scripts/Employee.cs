@@ -18,6 +18,7 @@ public class Employee : MonoBehaviour {
 	public int happiness;
 	public int performance;
 	public int productivity;
+	public int skill;
 	public int burnOut;
 	public int compensation;
 	public TeamTypes team;

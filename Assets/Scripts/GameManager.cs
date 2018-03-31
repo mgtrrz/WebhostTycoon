@@ -173,6 +173,12 @@ public class GameManager : MonoBehaviour {
 		Tick();
 	}
 
+	public int currentDay {
+		get {
+			return day;
+		}
+	}
+
 	public void UpdateFundsDisplay() {
 		fundsTextbox.text = "$" + funds;
 	}
