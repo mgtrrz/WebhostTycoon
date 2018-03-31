@@ -35,13 +35,14 @@ public class GameManager : MonoBehaviour {
 	public string difficulty;
 	public bool acceptingCustomers;
 	public ServerEnvironment environment;
+	public bool skipSetup;
 
 	/* ------------------ */
 	/* Player Performance */
 	/* ------------------ */
 	private int funds;
-	private float popularity;
-	private int satisfaction;
+	public float popularity;
+	public int satisfaction;
 	private int nps;
 
 	/* ---------------- */
@@ -253,7 +254,7 @@ public class GameManager : MonoBehaviour {
 	public void CalculateCustomerTraction() {
 
 		// Determining if we get a customer in this tick
-		if ( UnityEngine.Random.Range(0, 9000) > 8710 ) {
+		if ( UnityEngine.Random.Range(0, 10000) < popularity * 10 ) {
 			AddCustomer();
 		}
 	}
