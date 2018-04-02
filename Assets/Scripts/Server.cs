@@ -2,12 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ServerType {
-	Desktop, Workstation, Server1U, Server2U, Storage4U
-}
-
-
-
 public class Server : MonoBehaviour {
 
 	public string hostname;
@@ -63,6 +57,9 @@ public class Server : MonoBehaviour {
 	private int diskLogTimer;
 
 	//private GameManager.gameManager GameManager.gameManager;
+	public enum ServerType {
+		Customer, Utility
+	}
 
 	void Start() {
 		//GameManager.gameManager = FindObjectOfType<GameManager.gameManager>();
