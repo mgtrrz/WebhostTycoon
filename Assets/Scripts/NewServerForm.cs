@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class NewServerForm : MonoBehaviour {
 
 	public InputField hostname;
 	public Dropdown serverTypeDropdown;
+	public Dropdown serverEnclosureDropdown;
 	public Dropdown cpuDropdown;
 	public Dropdown softwareDropdown;
 	public Dropdown hardDriveDropdown;
@@ -22,7 +24,8 @@ public class NewServerForm : MonoBehaviour {
 	//private GameManager.gameManager GameManager.gameManager;
 
 	//List<string> serverTypes = new List<string>() {"Desktop", "Workstation", "Server1U", "Server2U", "Storage4U"};
-	List<string> serverTypes = new List<string>();
+	List<string> serverType = new List<string>();
+	List<string> serverEnclosureTypes = new List<string>();
 	List<string> cpuTypes = new List<string>();
 	List<string> hardDriveTypes = new List<string>();
 	List<string> hardDriveCapacityTypes = new List<string>();
@@ -32,9 +35,15 @@ public class NewServerForm : MonoBehaviour {
 	void Start () {
 		serverParent = GameObject.Find("Servers");
 		//GameManager.gameManager = FindObjectOfType<GameManager.gameManager>();
+
+		foreach ( Server.ServerType sType in Enum.GetValues(typeof(Server.ServerType)) ) {
+			serverType.Add(sType.ToString());
+		}
+
+
 		
 		foreach ( ServerChassis sc in GameManager.gameManager.allServerChassis) {
-			serverTypes.Add(sc.name + " ($" + sc.cost + ")");
+			serverEnclosureTypes.Add(sc.name + " ($" + sc.cost + ")");
 		}
 		
 		foreach ( CPU cpu in GameManager.gameManager.allCpus ) {
@@ -49,9 +58,11 @@ public class NewServerForm : MonoBehaviour {
 			software.Add(sw.name + " ($" + sw.cost + "/mo)");
 		}
 
-
 		serverTypeDropdown.ClearOptions();
-		serverTypeDropdown.AddOptions(serverTypes);
+		serverTypeDropdown.AddOptions(serverType);
+
+		serverEnclosureDropdown.ClearOptions();
+		serverEnclosureDropdown.AddOptions(serverEnclosureTypes);
 
 		cpuDropdown.ClearOptions();
 		cpuDropdown.AddOptions(cpuTypes);
@@ -75,7 +86,7 @@ public class NewServerForm : MonoBehaviour {
 		// Clear the list
 		hardDriveCapacityTypes.Clear();
 
-		for(int i=1; i <= GameManager.gameManager.allServerChassis[serverTypeDropdown.value].hardDriveCapacity; i++) {
+		for(int i=1; i <= GameManager.gameManager.allServerChassis[serverEnclosureDropdown.value].hardDriveCapacity; i++) {
 			hardDriveCapacityTypes.Add("x" + i);
 		}
 		hardDriveCapacityDropdown.ClearOptions();
@@ -101,7 +112,7 @@ public class NewServerForm : MonoBehaviour {
 		}
 		serverInfoDisplay.text = cpuTypes[cpuDropdown.value] + "\n" 
 							   + cores + "/" + logicalCores + "\n" 
-							   + GameManager.gameManager.allServerChassis[serverTypeDropdown.value].hardDriveCapacity;
+							   + GameManager.gameManager.allServerChassis[serverEnclosureDropdown.value].hardDriveCapacity;
 	}
 
 	void UpdateServerCostDisplay() {
@@ -116,7 +127,7 @@ public class NewServerForm : MonoBehaviour {
 			int cost = 0;
 
 			cost += GameManager.gameManager.allCpus[cpuDropdown.value].cost;
-			cost += GameManager.gameManager.allServerChassis[serverTypeDropdown.value].cost;
+			cost += GameManager.gameManager.allServerChassis[serverEnclosureDropdown.value].cost;
 			cost += GameManager.gameManager.allStorageDrives[hardDriveDropdown.value].cost * ( hardDriveCapacityDropdown.value + 1 );
 			cost += GameManager.gameManager.allSoftware[softwareDropdown.value].cost;
 
@@ -146,12 +157,13 @@ public class NewServerForm : MonoBehaviour {
 		var serverComponent = newServer.GetComponent<Server>();
 
 		serverComponent.hostname = hostname.text;
-		serverComponent.serverChassis = GameManager.gameManager.allServerChassis[serverTypeDropdown.value];
+		serverComponent.serverChassis = GameManager.gameManager.allServerChassis[serverEnclosureDropdown.value];
 		serverComponent.processor = GameManager.gameManager.allCpus[cpuDropdown.value];
 		serverComponent.software = GameManager.gameManager.allSoftware[softwareDropdown.value];
 
 		serverComponent.originalServerCost = UpfrontCost;
 		serverComponent.originalBuildDate = GameManager.gameManager.GetCurrentGameDate();
+		serverComponent.serverType = (Server.ServerType)serverTypeDropdown.value;
 
 		serverComponent.acceptCustomers = true;
 

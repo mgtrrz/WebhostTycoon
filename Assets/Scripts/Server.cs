@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.ComponentModel;
 
 public class Server : MonoBehaviour {
 
@@ -11,7 +12,7 @@ public class Server : MonoBehaviour {
 	public CPU processor; // The CPU this server is running
 	public List<StorageDrive> hardDrives; // A list of hard drives configured on this server
 	public Software software; // The software running on this server
-
+	public ServerType serverType;
 	public List<Customer> customers; // All the customers on this box (if any)
 
 	/*
@@ -58,7 +59,10 @@ public class Server : MonoBehaviour {
 
 	//private GameManager.gameManager GameManager.gameManager;
 	public enum ServerType {
-		Customer, Utility
+		[Description("Example Customer")]
+		Customer = 0, 
+		[Description("Example Utility")]
+		Utility = 1
 	}
 
 	void Start() {
