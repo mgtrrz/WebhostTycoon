@@ -8,6 +8,7 @@ public class NewServerForm : MonoBehaviour {
 
 	public InputField hostname;
 	public Dropdown serverTypeDropdown;
+	public Text serverTypeHelper;
 	public Dropdown serverEnclosureDropdown;
 	public Dropdown cpuDropdown;
 	public Dropdown softwareDropdown;
@@ -142,6 +143,10 @@ public class NewServerForm : MonoBehaviour {
 
 			return cost;
 		}
+	}
+
+	public void UpdateServerTypeHelperText() {
+		
 	}
 
 	public void PurchaseServer() {
