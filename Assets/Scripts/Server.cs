@@ -232,7 +232,7 @@ public class Server : MonoBehaviour {
 
 	public void CalculateMonthlyExpenses() {
 		// Costs to run the server, like software licenses or electricity costs
-		int cost = software.cost;
+		int cost = software.monthlyCost;
 		serverCosts = cost;
 	}
 

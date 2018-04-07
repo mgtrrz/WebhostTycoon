@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Software : MonoBehaviour {
+[CreateAssetMenu(fileName="Software", menuName="Server/Software", order = 3)]
+public class Software : ScriptableObject {
 
 	public string description;
 	public bool allowsCustomers;
 
 	public bool dedicated;
 	public int difficulty;
-	public int cost;
+	public int monthlyCost;
+	public int oneTimeCost;
 }

@@ -8,10 +8,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a55770d0b1d77174c942e4c71e5b35a7, type: 3}
-  m_Name: Utility
+  m_Script: {fileID: 11500000, guid: 3c60251cca568f54d9bff88e7c0e03d7, type: 3}
+  m_Name: HostPanel
   m_EditorClassIdentifier: 
-  description: Used for development, research, backups, or anything else your team
-    might need.
-  customerUse: 0
-  utilityUse: 1
+  description: 'Free and open source hosting platform. '
+  allowsCustomers: 1
+  dedicated: 0
+  difficulty: 60
+  monthlyCost: 0
+  oneTimeCost: 0

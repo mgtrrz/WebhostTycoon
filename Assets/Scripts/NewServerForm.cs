@@ -57,7 +57,7 @@ public class NewServerForm : MonoBehaviour {
 		}
 
 		foreach ( Software sw in GameManager.gameManager.allSoftware ) {
-			software.Add(sw.name + " ($" + sw.cost + "/mo)");
+			software.Add(sw.name + " ($" + sw.monthlyCost + "/mo)");
 		}
 
 		serverTypeDropdown.ClearOptions();
@@ -132,7 +132,7 @@ public class NewServerForm : MonoBehaviour {
 			cost += GameManager.gameManager.allCpus[cpuDropdown.value].cost;
 			cost += GameManager.gameManager.allServerChassis[serverEnclosureDropdown.value].cost;
 			cost += GameManager.gameManager.allStorageDrives[hardDriveDropdown.value].cost * ( hardDriveCapacityDropdown.value + 1 );
-			cost += GameManager.gameManager.allSoftware[softwareDropdown.value].cost;
+			cost += GameManager.gameManager.allSoftware[softwareDropdown.value].monthlyCost;
 
 			return cost;
 		}
@@ -141,7 +141,7 @@ public class NewServerForm : MonoBehaviour {
 	public int MonthlyRentalCost {
 		get { 
 			int cost = 0;
-			cost += GameManager.gameManager.allSoftware[softwareDropdown.value].cost;
+			cost += GameManager.gameManager.allSoftware[softwareDropdown.value].monthlyCost;
 
 			return cost;
 		}
