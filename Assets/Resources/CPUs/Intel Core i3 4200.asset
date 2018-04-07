@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Name: Intel Core i3 4200
   m_EditorClassIdentifier: 
   brand: 0
-  cores: 0
+  cores: 2
   hyperthreaded: 0
   cpuClass: 0
-  frequency: 0
-  cost: 0
-  minWattage: 0
-  maxWattage: 0
+  frequency: 3.6
+  cost: 90
+  minWattage: 20
+  maxWattage: 50

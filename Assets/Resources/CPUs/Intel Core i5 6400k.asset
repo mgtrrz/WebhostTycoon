@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Name: Intel Core i5 6400k
   m_EditorClassIdentifier: 
   brand: 0
-  cores: 0
+  cores: 4
   hyperthreaded: 0
   cpuClass: 0
-  frequency: 0
-  cost: 0
-  minWattage: 0
-  maxWattage: 0
+  frequency: 4
+  cost: 200
+  minWattage: 30
+  maxWattage: 60

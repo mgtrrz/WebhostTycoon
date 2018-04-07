@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Name: Intel Core i7 8770k
   m_EditorClassIdentifier: 
   brand: 0
-  cores: 0
-  hyperthreaded: 0
+  cores: 4
+  hyperthreaded: 1
   cpuClass: 0
-  frequency: 0
-  cost: 0
-  minWattage: 0
-  maxWattage: 0
+  frequency: 4.2
+  cost: 300
+  minWattage: 40
+  maxWattage: 90

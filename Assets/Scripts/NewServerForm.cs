@@ -78,6 +78,7 @@ public class NewServerForm : MonoBehaviour {
 		hostname.text = NameGenerator.hostnameGenerator();
 
 		UpdateHdCapacity();
+		UpdateServerTypeHelperText();
 	}
 
 	public void OnEnable() {
@@ -147,7 +148,7 @@ public class NewServerForm : MonoBehaviour {
 	}
 
 	public void UpdateServerTypeHelperText() {
-		
+		serverTypeHelper.text = GameManager.gameManager.allServerTypes[serverTypeDropdown.value].description;
 	}
 
 	public void PurchaseServer() {

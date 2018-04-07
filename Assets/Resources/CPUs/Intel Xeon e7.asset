@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Name: Intel Xeon e7
   m_EditorClassIdentifier: 
   brand: 0
-  cores: 0
-  hyperthreaded: 0
-  cpuClass: 0
-  frequency: 0
-  cost: 0
-  minWattage: 0
-  maxWattage: 0
+  cores: 16
+  hyperthreaded: 1
+  cpuClass: 2
+  frequency: 3.2
+  cost: 1400
+  minWattage: 90
+  maxWattage: 220
