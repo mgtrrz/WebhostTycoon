@@ -58,12 +58,6 @@ public class Server : MonoBehaviour {
 	private int diskLogTimer;
 
 	//private GameManager.gameManager GameManager.gameManager;
-	public enum ServerType {
-		[Description("Example Customer")]
-		Customer = 0, 
-		[Description("Example Utility")]
-		Utility = 1
-	}
 
 	void Start() {
 		//GameManager.gameManager = FindObjectOfType<GameManager.gameManager>();

@@ -37,10 +37,11 @@ public class NewServerForm : MonoBehaviour {
 		serverParent = GameObject.Find("Servers");
 		//GameManager.gameManager = FindObjectOfType<GameManager.gameManager>();
 
-		foreach ( Server.ServerType sType in Enum.GetValues(typeof(Server.ServerType)) ) {
-			serverType.Add(sType.ToString());
+		
+		foreach ( ServerType st in GameManager.gameManager.allServerTypes ) {
+			serverType.Add(st.name);
 		}
-
+		
 
 		
 		foreach ( ServerChassis sc in GameManager.gameManager.allServerChassis) {
@@ -168,7 +169,7 @@ public class NewServerForm : MonoBehaviour {
 
 		serverComponent.originalServerCost = UpfrontCost;
 		serverComponent.originalBuildDate = GameManager.gameManager.GetCurrentGameDate();
-		serverComponent.serverType = (Server.ServerType)serverTypeDropdown.value;
+		serverComponent.serverType = GameManager.gameManager.allServerTypes[serverTypeDropdown.value];
 
 		serverComponent.acceptCustomers = true;
 

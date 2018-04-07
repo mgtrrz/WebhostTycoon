@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour {
 	[Space]
 	[Header("Server Component Prefabs")]
 	public List<ServerChassis> allServerChassis;
+	public List<ServerType> allServerTypes;
 	public List<CPU> allCpus;
 	public List<StorageDrive> allStorageDrives;
 	public List<CustomerType> allCustomerTypes;

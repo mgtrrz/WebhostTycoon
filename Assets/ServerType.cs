@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : ScriptableObject {
+[CreateAssetMenu(fileName="ServerType", menuName="Server/Type", order = 1)]
+public class ServerType : ScriptableObject {
 
+	public string description;
+
+	public bool customerUse;
+	public bool utilityUse;
 	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }

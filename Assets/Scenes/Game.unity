@@ -6217,7 +6217,7 @@ Prefab:
     - target: {fileID: 224121595365855830, guid: 982438091b660e242a02a9e924c168f0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224121595365855830, guid: 982438091b660e242a02a9e924c168f0,
         type: 2}
@@ -11905,7 +11905,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hostname: {fileID: 728193733}
   serverTypeDropdown: {fileID: 1504862030}
-  serverTypeHelper: {fileID: 0}
+  serverTypeHelper: {fileID: 1296676794}
   serverEnclosureDropdown: {fileID: 1354921405}
   cpuDropdown: {fileID: 1780796516}
   softwareDropdown: {fileID: 181341519}

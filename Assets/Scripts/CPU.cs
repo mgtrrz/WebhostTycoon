@@ -10,9 +10,8 @@ public enum CpuClass {
 	Consumer, Enthusiast, Enterprise
 }
 
-public class CPU : MonoBehaviour {
-
-	public new string name;
+[CreateAssetMenu(fileName="CPU", menuName="Server/CPU", order = 2)]
+public class CPU : ScriptableObject {
 
 	public CpuBrand brand;
 	public int cores;
