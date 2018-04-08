@@ -17,7 +17,12 @@ public class Customer : MonoBehaviour {
 	public float diskUsage;
 	public int sites;
 
+	public int visits;
+	public int websiteEfficiency;
+
 	public float wattCost;
+
+
 
 
 	public Dictionary<string, int> dateJoined;
@@ -217,6 +222,14 @@ public class Customer : MonoBehaviour {
 	}
 
 	private void CalculateCpuUsage() {
+
+		// Calculating customer website visits
+		var currentVisits = Random.Range(-100, 1000);
+		if ( currentVisits < 0 ) {
+			currentVisits = 0;
+		}
+
+
 		/* Calculating this customer's CPU usage */
 		if ( Random.Range(1f, 100f) >= cxType.burstPercentage ) {
 			cpuUsage = Random.Range(cxType.minCpuUsage, cxType.maxCpuUsage);

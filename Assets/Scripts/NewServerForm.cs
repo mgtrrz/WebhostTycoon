@@ -104,7 +104,7 @@ public class NewServerForm : MonoBehaviour {
 	}
 
 	public void CloseForm() {
-		gameObject.SetActive(false);
+		Destroy(gameObject);
 	}
 
 	void UpdateServerInformationDisplay() {

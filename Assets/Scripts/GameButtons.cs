@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class GameButtons : MonoBehaviour {
 
-	public GameObject serverBuildSheetUI;
-	private GameManager gameManager;
+	public GameObject newServerForm;
 
 	void Start() {
-		gameManager = FindObjectOfType<GameManager>();
 	}
 
 	public void ShowServerBuildSheet() {
-		serverBuildSheetUI.SetActive(true);
+		//serverBuildSheetUI.SetActive(true);
+		Instantiate(newServerForm, Vector3.zero, Quaternion.identity, GameObject.Find("Canvas").transform);
 	}
 
 	public void AddCustomer() {
-		gameManager.AddCustomer();
+		GameManager.gameManager.AddCustomer();
 	}
 }

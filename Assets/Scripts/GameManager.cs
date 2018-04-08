@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour {
 	public Text popularityTextbox;
 	public Text satisfactionTextbox;
 	public GameObject dialogueBox;
+	public GameObject newServerForm;
 
 	public Text logTextbox;
 

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1404c54159368db408fd43b4ccb961a2, type: 3}
+  m_Name: PowerUser
+  m_EditorClassIdentifier: 
+  minCpuUsage: 5
+  maxCpuUsage: 30
+  burstCpuUsage: 40
+  burstPercentage: 25
+  minDiskUsage: 50
+  maxDiskUsage: 150
+  commonPercentage: 8

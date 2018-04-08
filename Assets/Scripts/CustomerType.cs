@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CustomerType : MonoBehaviour {
+[CreateAssetMenu(fileName="CustomerType", menuName="Customer/Type", order = 1)]
+public class CustomerType : ScriptableObject {
 	public float minCpuUsage;
 	public float maxCpuUsage;
 	public float burstCpuUsage;
