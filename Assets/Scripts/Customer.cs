@@ -8,20 +8,18 @@ public class Customer : MonoBehaviour {
 	public string customerName;
 	public int customerID;
 	public int age;
-	public string primarySite;
-	public Plan plan;
+	public string primarySite; // Their domain name. Just for aesthetic purposes
+	public Plan plan; // Their current plan
 
-	public float cpuUsage;
+	public float cpuUsage; // Current CPU usage
 	public float averageCpuUsage;
-	public float highestCpuUsage;
-	public float diskUsage;
-	public int sites;
-
-	public int visits;
-	public int websiteEfficiency;
-
-	public float wattCost;
-
+	public float highestCpuUsage; // Highest CPU usage recorded
+	public float diskUsage; // Amount of disk they are using.
+	public int sites; // Number of sites this user has, mostly for aesthetic purposes.
+	public int currentConcurrentVisitors; // number of concurrent visitors their site is currently seeing
+	private int cVisitors;
+	public int highestConcurrentVisitors; // Highest number of concurrent visitors recorded
+	public int websiteEfficiency; // Scale of 1-100
 
 
 
@@ -35,7 +33,7 @@ public class Customer : MonoBehaviour {
 
 
 	private int tickTimer;
-	private int monthlyChargeTimer;
+
 
 	private int isExperiencingIssues;
 	private int isHavingNoIssues;
@@ -65,19 +63,20 @@ public class Customer : MonoBehaviour {
 	}
 
 	public void CustomerTick() {
-		CalculateCpuUsage();
+		CalculateVisitorsAndUsage();
 		CalculateDiskUsage();
 
 		if ( isExperiencingIssues > 0 ) {
 			isExperiencingIssues--;
 		}
 
+		if ( websiteEfficiency == 0 ) {
+			websiteEfficiency = Random.Range(cxType.minSiteOptimization, cxType.maxSiteOptimization);
+		}
+
 		CancelDecision();
 		CheckIfAccountNoLongerNeeded();
 
-		if ( monthlyChargeTimer > 0 ) {
-			monthlyChargeTimer--;
-		}
 	}
 
 	public void CustomerDailyTick() {
@@ -221,25 +220,39 @@ public class Customer : MonoBehaviour {
 		}
 	}
 
-	private void CalculateCpuUsage() {
+	private void CalculateVisitorsAndUsage() {
 
 		// Calculating customer website visits
-		var currentVisits = Random.Range(-100, 1000);
-		if ( currentVisits < 0 ) {
-			currentVisits = 0;
-		}
 
-
-		/* Calculating this customer's CPU usage */
-		if ( Random.Range(1f, 100f) >= cxType.burstPercentage ) {
-			cpuUsage = Random.Range(cxType.minCpuUsage, cxType.maxCpuUsage);
+		// currentConcurrentVisitors = Random.Range(-cxType.negativeMinVisitors, cxType.maxVisitors);
+		if ( cVisitors >= cxType.maxVisitors ) {
+			cVisitors += Random.Range(-2, -8);
+		} else if ( cVisitors <= -cxType.negativeMinVisitors ) {
+			cVisitors += Random.Range(1, 5);
 		} else {
-			cpuUsage = Random.Range(cxType.maxCpuUsage, cxType.burstCpuUsage);
+			cVisitors += Random.Range(-2, 3);
 		}
+
+		currentConcurrentVisitors = cVisitors;
+
+		if ( currentConcurrentVisitors < 0 ) {
+			currentConcurrentVisitors = 0;
+		}
+
+
+
+		// Depending on the site optimization values, this would affect CPU usage 
+		// based on the visits they're currently getting
+		cpuUsage = ( ( websiteEfficiency * (cxType.minCpuUsage - cxType.maxCpuUsage) / 100) + cxType.maxCpuUsage ) * currentConcurrentVisitors;
+
 
 		/* Saving some stats of this customer's CPU usage  */
 		if ( cpuUsage > highestCpuUsage ) {
 			highestCpuUsage = cpuUsage;
+		}
+
+		if ( currentConcurrentVisitors > highestConcurrentVisitors ) {
+			highestConcurrentVisitors = currentConcurrentVisitors;
 		}
 	}
 

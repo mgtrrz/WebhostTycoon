@@ -12,9 +12,14 @@ MonoBehaviour:
   m_Name: CasualUser
   m_EditorClassIdentifier: 
   minCpuUsage: 0
-  maxCpuUsage: 1
-  burstCpuUsage: 4
+  maxCpuUsage: 2
+  burstCpuUsage: 0
   burstPercentage: 1
+  negativeMinVisitors: 500
+  maxVisitors: 25
+  burstVisitors: 50
+  minSiteOptimization: 50
+  maxSiteOptimization: 80
   minDiskUsage: 1
   maxDiskUsage: 10
   commonPercentage: 78

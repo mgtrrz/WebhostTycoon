@@ -11,10 +11,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1404c54159368db408fd43b4ccb961a2, type: 3}
   m_Name: ProblemUser
   m_EditorClassIdentifier: 
-  minCpuUsage: 10
-  maxCpuUsage: 50
+  minCpuUsage: 0
+  maxCpuUsage: 2
   burstCpuUsage: 70
   burstPercentage: 70
+  negativeMinVisitors: 200
+  maxVisitors: 200
+  burstVisitors: 500
+  minSiteOptimization: 0
+  maxSiteOptimization: 28
   minDiskUsage: 50
   maxDiskUsage: 300
-  commonPercentage: 6
+  commonPercentage: 5

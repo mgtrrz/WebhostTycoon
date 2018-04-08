@@ -12,9 +12,14 @@ MonoBehaviour:
   m_Name: PopularUser
   m_EditorClassIdentifier: 
   minCpuUsage: 0
-  maxCpuUsage: 10
+  maxCpuUsage: 2
   burstCpuUsage: 20
   burstPercentage: 10
+  negativeMinVisitors: 50
+  maxVisitors: 150
+  burstVisitors: 250
+  minSiteOptimization: 35
+  maxSiteOptimization: 78
   minDiskUsage: 5
   maxDiskUsage: 60
   commonPercentage: 8
