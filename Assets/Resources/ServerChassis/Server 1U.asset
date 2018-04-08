@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8be91f6c418cc6245b29fcae32139427, type: 3}
+  m_Name: Server 1U
+  m_EditorClassIdentifier: 
+  description: Standard server case. Must be stored on a rack. Supports 6 drives.
+  cost: 250
+  size: 1
+  rackCompatible: 1
+  hardDriveCapacity: 6
+  resellValue: 40

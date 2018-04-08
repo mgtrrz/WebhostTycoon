@@ -330,7 +330,7 @@ public class GameManager : MonoBehaviour {
 			customer.age = UnityEngine.Random.Range(18, 115);
 
 			customer.customerName = NameGenerator.generateRandomName(randGend);
-			customer.cxType = CalculateCustomerType();
+			customer.cxType = ReturnRandomCustomerType();
 			customer.dateJoined = GetCurrentGameDate();
 
 			customer.myServer = serverToUse;
@@ -344,7 +344,7 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 	
-	public CustomerType CalculateCustomerType() {
+	public CustomerType ReturnRandomCustomerType() {
 		if (allCustomerTypes == null) {
 			throw new Exception("There are no CustomerTypes to choose from!");
 		}
