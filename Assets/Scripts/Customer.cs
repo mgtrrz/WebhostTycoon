@@ -37,7 +37,7 @@ public class Customer : MonoBehaviour {
 
 	private int isExperiencingIssues;
 	private int isHavingNoIssues;
-	private int cancelThreshold;
+	private int cancelRisk;
 
 
 	public CustomerType cxType;
@@ -59,9 +59,9 @@ public class Customer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-
 	}
 
+	// CustomerTick is called once every "tick"
 	public void CustomerTick() {
 		CalculateVisitorsAndUsage();
 		CalculateDiskUsage();
@@ -79,6 +79,7 @@ public class Customer : MonoBehaviour {
 
 	}
 
+	// CustomerDailyTick is called once every in-game "Day"
 	public void CustomerDailyTick() {
 		isHavingNoIssues++;
 		CalculateCancellationIndex();
@@ -86,18 +87,17 @@ public class Customer : MonoBehaviour {
 		// 
 	}
 
+	// CustomerMonthlyTick is called once every in-game "Month"
 	public void CustomerMonthlyTick() {
 		// This happens once every month, but at the start of the month
 	}
 
+
+
+
+
 	private void ChargePlanCostMonthly() {
 		// Charge this customer's credit card every month after their acquisition
-		/*
-		if ( GameManager.gameManager.currentDay == dateJoined["Day"] && monthlyChargeTimer == 0 ) {
-			GameManager.gameManager.MakeProfit(plan.cost);
-			monthlyChargeTimer = 25;
-		}
-		*/
 		if ( GameManager.gameManager.currentDay == dateJoined["Day"] ) {
 			GameManager.gameManager.MakeProfit(plan.cost);
 		}
@@ -167,27 +167,27 @@ public class Customer : MonoBehaviour {
 
 	private void CalculateCancellationIndex() {
 		if ( satisfaction < 20 ) {
-			cancelThreshold += 5;
+			cancelRisk += 5;
 		} else if ( satisfaction < 40 ) {
-			cancelThreshold += 2;
+			cancelRisk += 2;
 		} else if ( satisfaction < 60 ) {
 			// do nothing
 		} else if ( satisfaction < 80 ) {
-			cancelThreshold -= 2;
+			cancelRisk -= 2;
 		} else if ( satisfaction <= 100 ) {
-			cancelThreshold -= 5;
+			cancelRisk -= 5;
 		}
 
-		if ( cancelThreshold > 100 ) {
-			cancelThreshold = 100;
-		} else if ( cancelThreshold < 0 ) {
-			cancelThreshold = 0;
+		if ( cancelRisk > 100 ) {
+			cancelRisk = 100;
+		} else if ( cancelRisk < 0 ) {
+			cancelRisk = 0;
 		}
 	}
 
 	private void CancelDecision() {
-		if ( Random.Range(0, 1000) < cancelThreshold ) {
-			CancelUser();
+		if ( Random.Range(0, 1000) < cancelRisk ) {
+			CancelUser("Low satisfaction");
 		}
 	}
 
@@ -196,14 +196,15 @@ public class Customer : MonoBehaviour {
 	// need the account.
 	private void CheckIfAccountNoLongerNeeded() {
 		int i = Random.Range(0,100000);
-		if ( i > 7124 && i < 7131 ) {
-			CancelUser();
+		int x = Random.Range(5,99995);
+		if ( i > x && i < (x + 10) ) {
+			CancelUser("No longer needed");
 		}
 	}
 
-	public void CancelUser() {
+	public void CancelUser(string reason = null) {
 		//Debug.Log("User " + customerName + " wishes to cancel!"); 
-		GameManager.gameManager.AddLogEntry(customerName + " cancelled their account");
+		GameManager.gameManager.AddLogEntry(customerName + " cancelled their account for the following reason: " + reason);
 		// First remove from the server i'm attached to
 		myServer.RemoveCustomer(this);
 		// Then destroy this gameobject

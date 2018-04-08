@@ -15,9 +15,9 @@ MonoBehaviour:
   maxCpuUsage: 2
   burstCpuUsage: 0
   burstPercentage: 1
-  negativeMinVisitors: 500
-  maxVisitors: 25
-  burstVisitors: 50
+  negativeMinVisitors: 100
+  maxVisitors: 10
+  burstVisitors: 20
   minSiteOptimization: 50
   maxSiteOptimization: 80
   minDiskUsage: 1

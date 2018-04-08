@@ -345,22 +345,34 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	public CustomerType CalculateCustomerType() {
-		/*
-		var customerTypes = new List<KeyValuePair<float, CustomerType>>();
-		foreach ( CustomerType cType in allCustomerTypes) {
-			customerTypes.Add(new KeyValuePair<float, CustomerType>(cType.commonPercentage, cType));
+		if (allCustomerTypes == null) {
+			throw new Exception("There are no CustomerTypes to choose from!");
 		}
-		*/
-		int randInt = UnityEngine.Random.Range(1,100);
-		if ( randInt < 84 ) {
-			return allCustomerTypes[0];
-		} else if ( randInt < 92 ) {
-			return allCustomerTypes[1];
-		} else if ( randInt < 97 ) {
-			return allCustomerTypes[2];
-		} else {
-			return allCustomerTypes[3];
+
+		float maxPercentage = 0f;
+		foreach (CustomerType ct in allCustomerTypes) {
+			if ( ct == null ) {continue;}
+			maxPercentage += ct.commonPercentage;
 		}
+
+		int randInt = UnityEngine.Random.Range(1, (int)maxPercentage + 1);
+		float totalPercentage = 0f;
+
+		for (int i = 0; i <= allCustomerTypes.Count; i++) {
+			if ( allCustomerTypes[i] == null ) { // If we came across an empty entry in this list
+				continue; // bypass it
+			}
+
+			totalPercentage += allCustomerTypes[i].commonPercentage;
+
+			if ( randInt <= totalPercentage ) {
+				Debug.Log("Returning CustomerType: " + allCustomerTypes[i].name + ". RandInt = " + randInt + " <= " + totalPercentage);
+				return allCustomerTypes[i];
+			}
+		}
+
+		// if we still made it this far, return the default and throw an error message
+		return allCustomerTypes[0];
 	}
 
 	public void ShowDialogueBox(string message, string header) {
