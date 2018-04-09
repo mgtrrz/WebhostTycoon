@@ -9,11 +9,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e658cd10ee63fd43b1f77663af6a900, type: 3}
-  m_Name: SSL
+  m_Name: Domain
   m_EditorClassIdentifier: 
-  description: Gives the ability for people to visit your website securely.
-  additionalValue: 5
-  supportBurden: 5
-  customerCost: 10
-  companyCost: 5
+  description: Now you can own your own .com!
+  additionalValue: 10
+  supportBurden: 8
+  customerCost: 12
+  companyCost: 4
   pricingModel: 1
+  catersToEveryone: 1
+  catersTo: 
+  researchRequirement: 0
+  availableToUse: 1
+  optional: 1

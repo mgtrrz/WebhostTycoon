@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum HostingType {
-	Shared, Reseller, VPS, Dedicated
-}
-public class Plan : MonoBehaviour {
+[CreateAssetMenu(fileName="Plan", menuName="PlansAndPerks/Plan", order = 1)]
+public class Plan : ScriptableObject {
 
-	public new string name;
 	public string description;
 	public int diskSpace;
 	public bool diskSpaceHardLimit;
 	public int bandwidth;
 	public int sites;
 	public int cost;
+	public List<Feature> planFeatures;
+	public HostingType hostingType;
+
+	public enum HostingType {
+		Shared, Reseller, VPS, Dedicated
+	}
 
 }

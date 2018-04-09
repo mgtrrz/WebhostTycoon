@@ -17,3 +17,8 @@ MonoBehaviour:
   customerCost: 10
   companyCost: 5
   pricingModel: 1
+  catersToEveryone: 0
+  catersTo: 020000000300000006000000
+  researchRequirement: 0
+  availableToUse: 1
+  optional: 1

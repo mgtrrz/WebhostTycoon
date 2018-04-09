@@ -2,7 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+public enum CustomerNeeds {
+	Personal,
+	Portfolio,
+	Business,
+	Commerce,
+	Leasure,
+	Fun,
+	Political
+}
 public class Customer : MonoBehaviour {
 
 	public string customerName;

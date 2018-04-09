@@ -11,9 +11,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e658cd10ee63fd43b1f77663af6a900, type: 3}
   m_Name: Email
   m_EditorClassIdentifier: 
-  description: Gives the ability for people to visit your website securely.
+  description: Having an email address is important if you want to be reached at yourname@mydomain.com
   additionalValue: 10
   supportBurden: 10
   customerCost: 0
   companyCost: 0
   pricingModel: 2
+  catersToEveryone: 0
+  catersTo: 0000000001000000020000000300000006000000
+  researchRequirement: 0
+  availableToUse: 1
+  optional: 1
