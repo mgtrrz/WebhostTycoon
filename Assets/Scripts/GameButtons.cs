@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameButtons : MonoBehaviour {
 
 	public GameObject newServerForm;
+	public Plan emptyPlan;
 
 	void Start() {
 	}
@@ -16,5 +17,14 @@ public class GameButtons : MonoBehaviour {
 
 	public void AddCustomer() {
 		GameManager.gameManager.AddCustomer();
+	}
+
+	public void CreatePlaceholderPlan() {
+		//Instantiate()
+		Plan newPlan = Instantiate(emptyPlan);
+	}
+
+	public void ModifyPlans() {
+
 	}
 }

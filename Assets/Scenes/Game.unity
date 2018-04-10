@@ -1462,7 +1462,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 692124228}
-        m_MethodName: ShowServerBuildSheet
+        m_MethodName: ModifyPlans
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1782,6 +1782,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   newServerForm: {fileID: 1388789105916522, guid: fd6df6f0c710a48838053e096c09566b,
     type: 2}
+  emptyPlan: {fileID: 11400000, guid: 8f06c882394a034498613f5c734154eb, type: 2}
 --- !u!1 &774307402
 GameObject:
   m_ObjectHideFlags: 0
@@ -2156,9 +2157,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a8592218d2e18451eaa7a31046712153, type: 2}
   - {fileID: 11400000, guid: b4f7cbbda0846461cb503c520fbc6f1d, type: 2}
   allPlans:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: efdacd1cee0fbe447b8441e7178eb64b, type: 2}
+  - {fileID: 11400000, guid: 7e1fdad07da3afa4293f9cfdaa1177c6, type: 2}
+  - {fileID: 11400000, guid: 8f06c882394a034498613f5c734154eb, type: 2}
   allSoftware:
   - {fileID: 11400000, guid: af08414b99713440d96c67c25a958fcf, type: 2}
   - {fileID: 11400000, guid: 2f5a7a1d101a94d06a78da16c60e6ac8, type: 2}
@@ -2270,7 +2271,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 692124228}
-        m_MethodName: ShowServerBuildSheet
+        m_MethodName: CreatePlaceholderPlan
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2598,7 +2599,7 @@ Prefab:
     - target: {fileID: 224121595365855830, guid: 982438091b660e242a02a9e924c168f0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224121595365855830, guid: 982438091b660e242a02a9e924c168f0,
         type: 2}
