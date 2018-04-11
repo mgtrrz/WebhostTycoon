@@ -56,12 +56,11 @@ public class Customer : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//gameManager = FindObjectOfType<GameManager>();
 		CalculateDiskUsage();
 
 		// We just got instantiated, so let's charge the monthly cost
 		ChargePlanCostMonthly();
-		// But we need to watch out here, to make sure that we don't accidentally double charge
+		// But we need to watch out here to make sure that we don't accidentally double charge
 	}
 	
 	// Update is called once per frame
@@ -92,12 +91,12 @@ public class Customer : MonoBehaviour {
 		isHavingNoIssues++;
 		CalculateCancellationIndex();
 		ChargePlanCostMonthly();
-		// 
+
 	}
 
 	// CustomerMonthlyTick is called once every in-game "Month"
 	public void CustomerMonthlyTick() {
-		// This happens once every month, but at the start of the month
+		// This happens once every month at the top of the hour (Month Day 1 Hour 1)
 	}
 
 
@@ -112,9 +111,9 @@ public class Customer : MonoBehaviour {
 	}
 
 
+	// Check to see how their server is doing
+	// We want to also check how their interactions with support has been
 	public void CalculateCustomerSatisfaction(float cpuUsage, float diskUsage, bool isFunctional) {
-		// Check to see how their server is doing
-		// We want to also check how their interactions with support has been
 
 		if ( isExperiencingIssues == 0 ) { 
 
@@ -173,6 +172,8 @@ public class Customer : MonoBehaviour {
 
 	}
 
+	// Takes into account their satisfaction and whether or not they're going to cancel.
+	// cancelRisk is an int type that increases or decreases based on their satisfaction.
 	private void CalculateCancellationIndex() {
 		if ( satisfaction < 20 ) {
 			cancelRisk += 5;
@@ -193,6 +194,8 @@ public class Customer : MonoBehaviour {
 		}
 	}
 
+
+	// If it's finally time to cancel due to low satisfaction
 	private void CancelDecision() {
 		if ( Random.Range(0, 1000) < cancelRisk ) {
 			CancelUser("Low satisfaction");
@@ -210,6 +213,11 @@ public class Customer : MonoBehaviour {
 		}
 	}
 
+
+	// Used to cancel this user.
+	// This is the proper way to boot the customer from the box as it will:
+	// 1. Remove the customer from their server
+	// 2. Destroy this gameObject
 	public void CancelUser(string reason = null) {
 		//Debug.Log("User " + customerName + " wishes to cancel!"); 
 		GameManager.gameManager.AddLogEntry(customerName + " cancelled their account for the following reason: " + reason);
@@ -219,6 +227,8 @@ public class Customer : MonoBehaviour {
 		Destroy(gameObject);
 	}
 
+
+	// Public method to manually modify satisfaction for this user from an outside source
 	private void ModifySatisfaction(int amount) {
 		satisfaction += amount;
 
@@ -229,6 +239,13 @@ public class Customer : MonoBehaviour {
 		}
 	}
 
+
+	// Calculating our CPU and Visitors for this customer.
+	// This is where CPU usage is calculated based on the number of visitors their website is getting.
+	// The behavior of this customer comes from "cxType" (CustomerType) ScriptableObject, which basically
+	// has stats for casual users, popular, problem, etc.
+	//
+	// There is still a lot of tweaking necessary for this to ensure a proper balance of usage
 	private void CalculateVisitorsAndUsage() {
 
 		// Calculating customer website visits
@@ -265,6 +282,11 @@ public class Customer : MonoBehaviour {
 		}
 	}
 
+	// This is where disk usage is calculated for users.
+	// This takes into account their behavior from cxType (CustomerType) ScriptableObject
+	// AND their Plan type and what kind of usage they're allowed.
+	//
+	// There is still a lot of tweaking to do here.
 	private void CalculateDiskUsage() {
 
 		if ( diskUsage == 0 ) { // Calculate first time usage

@@ -12,7 +12,7 @@ public class Server : MonoBehaviour {
 	public CPU processor; // The CPU this server is running
 	public List<StorageDrive> hardDrives; // A list of hard drives configured on this server
 	public Software software; // The software running on this server
-	public ServerType serverType;
+	public ServerType serverType; // If this server is used for customers or utility
 	public List<Customer> customers; // All the customers on this box (if any)
 
 	/*
@@ -64,6 +64,9 @@ public class Server : MonoBehaviour {
 	}
 
 
+	// Returns the number of hard drives this server CAN SUPPORT.
+	// Not the amount of drives currently in the machine or total disk space.
+	// This is returned from the ServerChassis object attached to this machine.
 	public int hardDriveCapacity {
 		get { 
 			if ( serverChassis != null ) {
@@ -73,6 +76,8 @@ public class Server : MonoBehaviour {
 		}
 	}
 
+	// Total number of CPU CORES attached to this server.
+	// It just returns the number from the attached CPU object.
 	public int cpuCores {
 		get { 
 			if ( processor != null ) {
@@ -82,6 +87,9 @@ public class Server : MonoBehaviour {
 		}
 	}
 
+	// Total number of LOGICAL CPU cores from the same CPU object.
+	// If the processor has hyperthreaded enabled, it returns the number 
+	// of cores doubled.
 	public int logicalCores {
 		get {
 			if ( processor != null ) {
@@ -95,6 +103,7 @@ public class Server : MonoBehaviour {
 		}
 	}
 
+	// Returns the name of the processor attached to this server 
 	public string processorName {
 		get { 
 			if ( processor != null ) {
@@ -104,6 +113,7 @@ public class Server : MonoBehaviour {
 		}
 	}
 	
+	// Returns the frequency/speed of the processor attached to this server
 	public float processorSpeed {
 		get {
 			if ( processor != null ) {
@@ -113,6 +123,9 @@ public class Server : MonoBehaviour {
 		}
 	}
 
+	// Returns total disk space of the server
+	// Trying to determine if we should calculate RAID and lost disk space
+	// In addition to failing hard drives. For that extra panic factor!
 	public int GetTotalDiskSpace {
 		get {
 			int totalDiskSpace = 0;
@@ -127,10 +140,10 @@ public class Server : MonoBehaviour {
 	/* ------------------------------------------------ */
 
 
-
+	// Called every in-game 'tick' or 'hour'.
 	public void ServerTick() {
-		// Debug.Log("Server: " + hostname + " got ServerTick broadcast!");
-		// Resources
+
+		// Usage
 		CalculateCpuUsage();
 		CalculateDiskUsage();
 		CalculatePowerUsage();
@@ -139,8 +152,10 @@ public class Server : MonoBehaviour {
 		CalculateRevenue();
 		CalculateMonthlyExpenses();
 
+		// Customer Related
 		CalculateCustomerSatisfaction();
 
+		// Sending data to customers
 		BroadcastServerPerformance(); // For sending server usage to customers
 		LogServerPerformance(); // For notifying the player about server performance
 
@@ -153,6 +168,7 @@ public class Server : MonoBehaviour {
 		}
 	}
 
+	// Called every in-game month, at the top of the hour. (Month 1, Hour 0)
 	public void ServerMonthlyTick() {
 		// Debug.Log("Server: " + hostname + " got MONTHLY ServerTick broadcast!");
 		// Calculating our monthly revenue and expenses
@@ -160,12 +176,16 @@ public class Server : MonoBehaviour {
 	}
 
 
+	// Sends information about CPU usage, disk usage, and whether the server is functional
+	// to the customer.
 	public void BroadcastServerPerformance() {
 		foreach (Customer cx in customers) {
 			cx.CalculateCustomerSatisfaction(cpuUsage, CalculateDiskPercentage(), isFunctional());
 		}
 	}
 
+
+	// For notifying the player about server performance/issues
 	private void LogServerPerformance() {
 
 		if ( cpuLogTimer == 0 ) {
@@ -189,6 +209,7 @@ public class Server : MonoBehaviour {
 		}
 	}
 
+	// Grabbing average customer satisfaction of all customers on this server
 	private void CalculateCustomerSatisfaction() {
 		if ( customers.Count == 0 ) {
 			return;
@@ -200,6 +221,7 @@ public class Server : MonoBehaviour {
 		serverCustomerSatisfaction = cxSatisfaction / customers.Count;
 	}
 
+	// Grabbing CPU usage from each of the customers
 	public void CalculateCpuUsage() {
 		cpuLoad = 0;
 		cpuUsage = 0;
@@ -209,6 +231,7 @@ public class Server : MonoBehaviour {
 		cpuUsage = cpuLoad / logicalCores; 
 	}
 
+	// Grabbing disk usage from each of the customers
 	public void CalculateDiskUsage() {
 		diskUsage = 0;
 		foreach (Customer cx in customers) {
@@ -216,10 +239,14 @@ public class Server : MonoBehaviour {
 		}
 	}
 
+	// Returns the percentage of disk space used on the server.
 	public float CalculateDiskPercentage() {
 		return ( diskUsage / GetTotalDiskSpace ) * 100;
 	}
+	
 
+	// Returns how much money we're making from customers on this server.
+	// Calculates their plan cost.
 	public void CalculateRevenue() {
 		// Money coming into the server from customers
 		
@@ -230,12 +257,15 @@ public class Server : MonoBehaviour {
 		
 	}
 
+	// Costs to run the server, like software licenses or electricity costs
 	public void CalculateMonthlyExpenses() {
-		// Costs to run the server, like software licenses or electricity costs
 		int cost = software.monthlyCost;
 		serverCosts = cost;
 	}
 
+
+	// Calculating Power usage of the server, but not sure if this is something
+	// we want to take into account
 	private void CalculatePowerUsage() {
 		// CPUs have a minimum watt and maximum watt
 		// When CPU usage is at 0%, use minimum watt. If at 100% use maximum
@@ -257,15 +287,19 @@ public class Server : MonoBehaviour {
 		customers.Remove(customer);
 	}
 
+
+	// Whether the server SHOULD be functional (but may not account for usage?)
 	public bool isFunctional() {
-		/* Server needs a processor and hard drives to function */
+		/* Server needs a processor, hard drives, and a case to function */
 		if ( processor == null ) {
 			return false;
 		}
 		if ( hardDrives == null ) {
 			return false;
 		}
-
+		if ( serverChassis == null ) {
+			return false;
+		}
 
 
 		return true;

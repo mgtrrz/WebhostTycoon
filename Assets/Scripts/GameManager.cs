@@ -96,7 +96,8 @@ public class GameManager : MonoBehaviour {
 	public enum ServerEnvironment {
 		Home, Provider, Datacenter, Cloud
 	}
-
+	
+	// Singleton stuff
 	void Awake() {
 		// Singleton
 		if (gameManager == null) {
@@ -107,11 +108,13 @@ public class GameManager : MonoBehaviour {
 			Destroy(gameObject);
 		}
 	}
-	void Start () {
-		// Keep this persistent across all scenes
 
+
+	void Start () {
+		// This will fail in other scenes, so we'll need to handle a better way to do this.
 		customerParent = FindObjectOfType<CustomerParent>();
 		serverParent = FindObjectOfType<ServerParent>();
+
 		/* Initializing our Clock */
 		day = 1;
 		week = 1;
@@ -119,6 +122,7 @@ public class GameManager : MonoBehaviour {
 		year = 1;
 		funds = 1000;
 
+		// Dev variables
 		if ( GameMode == "DEV" ) {
 			playerName = "Marcus Gutierrez";
 			companyName = "LoudServers";
@@ -126,15 +130,18 @@ public class GameManager : MonoBehaviour {
 			companyTld = ".com";
 		}
 
-
+		// UI Display
 		UpdateFundsDisplay();
 		UpdateSummarizedDisplay();
 	}
 	
+
 	void Update () {
 		
 	}
 
+	// Handles our in-game tick/hour!
+	// Doing it in FixedUpdate means we can pause time using Unity's built in tools
 	void FixedUpdate() {
 		if ( counter <= 0 ) {
 			TickClock();
@@ -143,8 +150,10 @@ public class GameManager : MonoBehaviour {
 
 		counter -= Time.fixedDeltaTime;
 	}
-
-	public void TickClock() {
+	
+	// Private method for incrementing hours, days, months, weeks
+	// for our in-game clock.
+	private void TickClock() {
 		hour++;
 
 		if ( hour > 23 ) {
@@ -175,48 +184,8 @@ public class GameManager : MonoBehaviour {
 		Tick();
 	}
 
-	public int currentDay {
-		get {
-			return day;
-		}
-	}
-
-	public void UpdateFundsDisplay() {
-		fundsTextbox.text = "$" + funds;
-	}
-
-	public void UpdateHourDisplay() {
-		hourTextbox.text = hour.ToString();
-	}
-
-	public void UpdateDayMonthDisplay() {
-		dayMonthTextbox.text = GameDate.GetMonthNameFromInt(month)  + " " + day;
-	}
-	
-	public void UpdateYearDisplay() {
-		yearTextbox.text = year.ToString();
-	}
-
-	public void UpdateSummarizedDisplay() {
-		websiteName.text = domain + companyTld;
-
-		totalCustomersTextbox.text = customerParent.transform.childCount.ToString();
-		totalServersTextbox.text = servers.Count.ToString();
-
-		popularityTextbox.text = popularity.ToString();
-		satisfactionTextbox.text = satisfaction.ToString();
-	}
-
-
-	public void AddLogEntry(string message) {
-		if ( logTextbox.cachedTextGenerator.lineCount > 8 ) {
-			logTextbox.text = logTextbox.text.Substring(logTextbox.text.IndexOf('\n') + 1);
-		}
-
-		logTextbox.text += message + "\n";
-	}
-
-	public void Tick() {
+	// Our in-game tick. Responsible for broadcasting ticks to customers and servers
+	private void Tick() {
 
 		// Send a message to all of our servers to calculate their things!
 		serverParent.BroadcastTick();
@@ -232,16 +201,74 @@ public class GameManager : MonoBehaviour {
 		UpdateSummarizedDisplay();
 	}
 	
-	public void DailyTick() {
+	// in-game tick, sending out a broadcast once every day.
+	private void DailyTick() {
 		customerParent.BroadcastDailyTick();
 	}
 
-	public void MonthlyTick() {
+	// in-game tick, sending out a broadcast once every month.
+	private void MonthlyTick() {
 		// for our monthly costs!
 		serverParent.BroadcastMonthlyTick();
 		customerParent.BroadcastMonthlyTick();
 	}
 
+	// Returns current day
+	public int currentDay {
+		get {
+			return day;
+		}
+	}
+
+	// UI
+	// Updates funds
+	public void UpdateFundsDisplay() {
+		fundsTextbox.text = "$" + funds;
+	}
+
+	// UI
+	// Updates the hour display
+	public void UpdateHourDisplay() {
+		hourTextbox.text = hour.ToString();
+	}
+
+	// UI
+	// Updates the day and month display
+	public void UpdateDayMonthDisplay() {
+		dayMonthTextbox.text = GameDate.GetMonthNameFromInt(month)  + " " + day;
+	}
+	
+	// UI
+	// Updates the year display (Could we just combine these methods?)
+	public void UpdateYearDisplay() {
+		yearTextbox.text = year.ToString();
+	}
+
+	// UI
+	// Updates information about this current game
+	public void UpdateSummarizedDisplay() {
+		websiteName.text = domain + companyTld;
+
+		totalCustomersTextbox.text = customerParent.transform.childCount.ToString();
+		totalServersTextbox.text = servers.Count.ToString();
+
+		popularityTextbox.text = popularity.ToString();
+		satisfactionTextbox.text = satisfaction.ToString();
+	}
+
+
+	// UI
+	// Log text box that shows current messages
+	public void AddLogEntry(string message) {
+		if ( logTextbox.cachedTextGenerator.lineCount > 8 ) {
+			logTextbox.text = logTextbox.text.Substring(logTextbox.text.IndexOf('\n') + 1);
+		}
+
+		logTextbox.text += message + "\n";
+	}
+
+
+	// Use this method to subtract money from the players funds
 	public bool MakePurchase(int amount) {
 		// We have more money than the amount
 		// they want to purchase, so we can allow it
@@ -253,12 +280,14 @@ public class GameManager : MonoBehaviour {
 		return false;
 	}
 
+
+	// Use this method to add money to the players funds
 	public void MakeProfit(int amount) {
 		funds += amount;
 		UpdateFundsDisplay();
 	}
 
-
+	// Method for calculating how many customers we should be getting per tick.
 	public void CalculateCustomerTraction() {
 
 		// Determining if we get a customer in this tick
@@ -267,6 +296,9 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	// Getting the satisfaction of all of the customers.
+	// We might just want to iterate through the servers instead of the customer
+	// since the server already calculates satisfaction for each of its customers.
 	private void CalculateCustomerSatisfaction() {
 		if ( customerParent.transform.childCount == 0 ) {
 			return;
@@ -280,10 +312,12 @@ public class GameManager : MonoBehaviour {
 		satisfaction = totalSatisfaction / customerParent.transform.childCount;
 	}
 	
+	
 	private void CalculateCustomerPopularity() {
 
 	}
 
+	// Returns current Game Date
 	public Dictionary<string, int> GetCurrentGameDate() {
 		var dateDict = new Dictionary<string, int>();
 		dateDict.Add("Month", month);
@@ -292,6 +326,8 @@ public class GameManager : MonoBehaviour {
 		return dateDict;
 	}
 
+
+	// Method for adding a customer
 	public void AddCustomer() {
 		if (!acceptingCustomers) { // if we're not accepting customers, bounce outta here
 			return;
@@ -344,6 +380,9 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 	
+	// Returns a random customer Type depending on the CustomerType list
+	// Each CustomerType has a "commonPercentage" variable that we use to calculate
+	// the percentage each customer should get that CustomerType
 	public CustomerType ReturnRandomCustomerType() {
 		if (allCustomerTypes == null) {
 			throw new Exception("There are no CustomerTypes to choose from!");
@@ -375,11 +414,13 @@ public class GameManager : MonoBehaviour {
 		return allCustomerTypes[0];
 	}
 
+	// For showing a dialogue box with a message and header.
 	public void ShowDialogueBox(string message, string header) {
 		GameObject dialogue = Instantiate(dialogueBox, Vector3.zero, Quaternion.identity, GameObject.Find("Canvas").transform);
 		dialogue.GetComponent<MessageDialog>().SetMessage(message, header);
 	}
 
+	// Base for saving the game but not currently functioning
 	public void SaveGame() {
 		var bf = new BinaryFormatter();
 		var file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
@@ -391,6 +432,7 @@ public class GameManager : MonoBehaviour {
 		file.Close();
 	}
 
+	// Base for loading the game but not currently functioning
 	public void LoadGame() {
 		if ( File.Exists(Application.persistentDataPath + "/playerInfo.dat") ) {
 			var bf = new BinaryFormatter();
