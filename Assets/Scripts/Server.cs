@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.ComponentModel;
-
+using System;
 public class Server : MonoBehaviour {
 
 	public string hostname;
@@ -304,5 +304,10 @@ public class Server : MonoBehaviour {
 
 		return true;
 	}
+	
+}
+
+[Serializable]
+class ServerData {
 	
 }
