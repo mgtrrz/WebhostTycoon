@@ -355,9 +355,9 @@ public class GameManager : MonoBehaviour {
 				}
 			}
 
-			GameObject serverParent = GameObject.Find("Customers");
+			//GameObject serverParent = GameObject.Find("Customers");
 			// Add them in there
-			Customer customer = Instantiate(customerPrefab, Vector3.zero, Quaternion.identity, serverParent.transform);
+			Customer customer = Instantiate(customerPrefab, Vector3.zero, Quaternion.identity, serverToUse.transform);
 
 			string[] gender = new string[] {"male", "female"};
 

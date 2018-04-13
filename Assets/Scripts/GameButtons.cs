@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameButtons : MonoBehaviour {
 
 	public GameObject newServerForm;
+	public GameObject playerPlansParent;
 	public Plan emptyPlan;
 
 	void Start() {
@@ -21,7 +22,12 @@ public class GameButtons : MonoBehaviour {
 
 	public void CreatePlaceholderPlan() {
 		//Instantiate()
-		Plan newPlan = Instantiate(emptyPlan);
+		Plan newPlan = Instantiate(emptyPlan,Vector3.zero, Quaternion.identity, playerPlansParent.transform);
+		//Plan planDetails = newPlan.GetComponent<Plan>();
+		newPlan.description = "This is a default plan!";
+		newPlan.diskSpace = 10;
+		newPlan.name = "Whatever";
+
 	}
 
 	public void ModifyPlans() {

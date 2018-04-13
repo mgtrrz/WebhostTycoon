@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName="Plan", menuName="PlansAndPerks/Plan", order = 1)]
-public class Plan : ScriptableObject {
+public class Plan : MonoBehaviour {
 
 	public string description;
 	public int diskSpace;
