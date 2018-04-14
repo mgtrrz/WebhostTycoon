@@ -142,6 +142,7 @@ public class Server : MonoBehaviour {
 
 	// Called every in-game 'tick' or 'hour'.
 	public void ServerTick() {
+		BroadcastMessage("CustomerTick", SendMessageOptions.DontRequireReceiver );
 
 		// Usage
 		CalculateCpuUsage();
@@ -168,8 +169,13 @@ public class Server : MonoBehaviour {
 		}
 	}
 
+	public void ServerDailyTick() {
+		BroadcastMessage("CustomerDailyTick", SendMessageOptions.DontRequireReceiver );
+	}
+
 	// Called every in-game month, at the top of the hour. (Month 1, Hour 0)
 	public void ServerMonthlyTick() {
+		BroadcastMessage("CustomerMonthlyTick", SendMessageOptions.DontRequireReceiver );
 		// Debug.Log("Server: " + hostname + " got MONTHLY ServerTick broadcast!");
 		// Calculating our monthly revenue and expenses
 		GameManager.gameManager.MakeProfit( serverCosts );

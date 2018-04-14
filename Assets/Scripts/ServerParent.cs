@@ -16,6 +16,10 @@ public class ServerParent : MonoBehaviour {
 		BroadcastMessage("ServerTick", SendMessageOptions.DontRequireReceiver );
 	}
 
+	public void BroadcastDailyTick() {
+		BroadcastMessage("ServerDailyTick", SendMessageOptions.DontRequireReceiver );
+	}
+
 	public void BroadcastMonthlyTick() {
 		// Debug.Log("Got request to Broadcast the Monthly Tick to our servers");
 		BroadcastMessage("ServerMonthlyTick", SendMessageOptions.DontRequireReceiver );

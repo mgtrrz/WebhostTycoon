@@ -164,6 +164,7 @@ public class Customer : MonoBehaviour {
 			if ( Random.Range(1,200) > 148 ) {
 				if ( isHavingNoIssues >= 2) {
 					ModifySatisfaction(5);
+					GameManager.gameManager.ModifyPopularity(1);
 					isHavingNoIssues = 0;
 				}
 			}

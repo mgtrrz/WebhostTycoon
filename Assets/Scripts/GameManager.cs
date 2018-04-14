@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour {
 	/* Player Performance */
 	/* ------------------ */
 	private int funds;
-	public float popularity;
+	public int popularity;
 	public int satisfaction;
 	private int nps;
 
@@ -203,14 +203,13 @@ public class GameManager : MonoBehaviour {
 	
 	// in-game tick, sending out a broadcast once every day.
 	private void DailyTick() {
-		customerParent.BroadcastDailyTick();
+		serverParent.BroadcastDailyTick();
 	}
 
 	// in-game tick, sending out a broadcast once every month.
 	private void MonthlyTick() {
 		// for our monthly costs!
 		serverParent.BroadcastMonthlyTick();
-		customerParent.BroadcastMonthlyTick();
 	}
 
 	// Returns current day
@@ -290,8 +289,20 @@ public class GameManager : MonoBehaviour {
 	// Method for calculating how many customers we should be getting per tick.
 	public void CalculateCustomerTraction() {
 
+		int tempPop = 0;
+		int highPop = 0;
+		if ( popularity <= 5 ) {
+			tempPop = 5;
+			highPop = 50;
+		} else {
+			tempPop = (int)popularity;
+			highPop = popularity*popularity;
+		}
+		var randomPop = UnityEngine.Random.Range(0, highPop );
+
+		Debug.Log("Popularity: " + popularity + ". TempPop: " + tempPop + ". HighPop: " + highPop + ". Our Random Number: " + randomPop);
 		// Determining if we get a customer in this tick
-		if ( UnityEngine.Random.Range(0, 10000) < popularity * 10 ) {
+		if ( randomPop <= tempPop) {
 			AddCustomer();
 		}
 	}
@@ -324,6 +335,13 @@ public class GameManager : MonoBehaviour {
 		dateDict.Add("Day", day);
 		dateDict.Add("Year", year);
 		return dateDict;
+	}
+
+	public void ModifyPopularity(int amt) {
+		popularity += amt;
+		if (popularity < 0) {
+			popularity = 0;
+		}
 	}
 
 
