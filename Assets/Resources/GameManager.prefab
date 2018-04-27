@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1622800663482908}
+  m_IsPrefabParent: 1
+--- !u!1 &1622800663482908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4128803577534418}
+  - component: {fileID: 114760766044190010}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4128803577534418
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1622800663482908}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114760766044190010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1622800663482908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cad1768d0591894e990686a3111f411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeInterval: 1
+  servers: []
+  playerName: 
+  companyName: 
+  domain: 
+  companyTld: 
+  difficulty: 
+  acceptingCustomers: 1
+  environment: 0
+  skipSetup: 0
+  popularity: 0
+  satisfaction: 0
+  allServerChassis:
+  - {fileID: 11400000, guid: 9d1198a70c6a6df48a706bda7ca6732a, type: 2}
+  - {fileID: 11400000, guid: 15636e61bfb7aaf439cb91e4b598429c, type: 2}
+  - {fileID: 11400000, guid: a444f6ec51de4af40abedf7b75adc4a2, type: 2}
+  - {fileID: 11400000, guid: f711f81dd3c7192468a4121b825aeb27, type: 2}
+  - {fileID: 11400000, guid: 16a77e69f72435d479fdd8ef27652812, type: 2}
+  - {fileID: 11400000, guid: 59d0c2968095a2c49ab9586da5a7ebe4, type: 2}
+  allServerTypes:
+  - {fileID: 11400000, guid: 06edf2f194d744d8d90cbce53ca4968e, type: 2}
+  - {fileID: 11400000, guid: 4b587241b02bf4fbfbc19fb87c5cd667, type: 2}
+  allCpus:
+  - {fileID: 11400000, guid: e77b9d353fe164cbfb588e03dec21c2d, type: 2}
+  - {fileID: 11400000, guid: 9d0220365b3a64efa9483bb51c6687eb, type: 2}
+  - {fileID: 11400000, guid: a64e70ad89d1e4a53a7919143badbfe5, type: 2}
+  - {fileID: 11400000, guid: 3d90dd260793347538f08d60d67d22d2, type: 2}
+  - {fileID: 11400000, guid: c847e3d11245f482f863161d1eb13460, type: 2}
+  allStorageDrives:
+  - {fileID: 114457701473261238, guid: 597c7eaa9b6ad2949a5b6062708e6ee0, type: 2}
+  - {fileID: 114351253829106984, guid: 3fc64dec77fbee44da96bc9a64a35677, type: 2}
+  - {fileID: 114081340608244864, guid: 61fd4729feb00f54caffe30bbc47a07d, type: 2}
+  - {fileID: 114886591115095938, guid: 97e264d7fb4b19c4a908d904ba7ce39a, type: 2}
+  - {fileID: 114517621814947122, guid: a3709b56e427dbe4386b601fa5a59d48, type: 2}
+  - {fileID: 114792579414637540, guid: 4a2a08f79f547d54696f77d3af1fa704, type: 2}
+  - {fileID: 114422948740301446, guid: b9690dc448ce1b44fbc2995d5217d335, type: 2}
+  - {fileID: 114957247272717996, guid: f20062cff99b4ee43b1f987ef4ca5e20, type: 2}
+  - {fileID: 114086975218601674, guid: a7ebfd3844f99aa40bf2bd36ce06fbac, type: 2}
+  - {fileID: 114607546624889308, guid: fa06077078f36804abf5ce18a9ac01e6, type: 2}
+  - {fileID: 114599819923112404, guid: f4cd961e1b7f99a4592b208730afb315, type: 2}
+  - {fileID: 114030813006035512, guid: 6168637b354eb2546aa5d3ce4e2d2167, type: 2}
+  - {fileID: 114478644163335910, guid: 2ae4f50774a7f8547adba24b493ada68, type: 2}
+  - {fileID: 114713585486412904, guid: cc7ff892ef9be2948b4232227777dc65, type: 2}
+  - {fileID: 114714181812177614, guid: 7a4075642baa0e741a35633ab3ae412b, type: 2}
+  - {fileID: 114104905427184190, guid: f45643d5ef26a4a4e944c939792d094a, type: 2}
+  - {fileID: 114547376255043952, guid: 5ca67f81656016e4a8db63c36ebe43cd, type: 2}
+  allCustomerTypes:
+  - {fileID: 11400000, guid: 1f4e25b4a785c4a458cfda8a7431d815, type: 2}
+  - {fileID: 11400000, guid: 114c502a079f44d0095da4c7f3180aa5, type: 2}
+  - {fileID: 11400000, guid: a8592218d2e18451eaa7a31046712153, type: 2}
+  - {fileID: 11400000, guid: b4f7cbbda0846461cb503c520fbc6f1d, type: 2}
+  allPlans:
+  - {fileID: 114025328735404532, guid: e4ad576cceae0904992740246dcf5c08, type: 2}
+  - {fileID: 114568899885748062, guid: e8ad6e7c509998643815bf22a777a07c, type: 2}
+  - {fileID: 114424111519005116, guid: 183f9debb82f8cf4db997c154c0e667b, type: 2}
+  allSoftware:
+  - {fileID: 11400000, guid: af08414b99713440d96c67c25a958fcf, type: 2}
+  - {fileID: 11400000, guid: 2f5a7a1d101a94d06a78da16c60e6ac8, type: 2}
+  - {fileID: 11400000, guid: 874e8f3a5d0f74470800357745ccb5fa, type: 2}
+  serverPrefab: {fileID: 114685298956524320, guid: e0830e2e9adbf974198dcd75ed24ac25,
+    type: 2}
+  customerPrefab: {fileID: 114323860342122212, guid: ec762a15907df7b43b31a34b0562bb88,
+    type: 2}
+  websiteName: {fileID: 0}
+  fundsTextbox: {fileID: 0}
+  hourTextbox: {fileID: 0}
+  dayMonthTextbox: {fileID: 0}
+  yearTextbox: {fileID: 0}
+  totalCustomersTextbox: {fileID: 0}
+  totalServersTextbox: {fileID: 0}
+  popularityTextbox: {fileID: 0}
+  satisfactionTextbox: {fileID: 0}
+  dialogueBox: {fileID: 1600280913683868, guid: fb93c69b03100324bbbff50694bc0eb8,
+    type: 2}
+  newServerForm: {fileID: 0}
+  logTextbox: {fileID: 0}
